@@ -20,10 +20,10 @@ return [
         ],
         'mandarCorreoActivacion' => true, // Envia correo electronico para activar la cuenta del usuario
             'email' => [ 
-                'emailActivacion' => '',
-                'subjectActivacion' => '',
-                'emailRecuperarPass' => '',
-                'subjectRecuperarPass' => '' 
+                'emailActivacion' => 'development@2gom.com.mx',
+                'subjectActivacion' => 'Bienvenido',
+                'emailRecuperarPass' => 'development@2gom.com.mx',
+                'subjectRecuperarPass' => 'Recuperar contraseña' 
             ],
             'recueperarPass' => [ 
                 'diasValidos' => 2, // Numero de dias que durara la recuperación de la contraseña
