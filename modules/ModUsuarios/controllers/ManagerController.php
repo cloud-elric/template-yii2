@@ -190,10 +190,10 @@ class ManagerController extends Controller {
 		}
 		
 		// asi podemos obtener sus datos de los amigos
-		foreach($data['friendsInApp'] as $key=>$value){
-			$value->id;
-			$value->name;
-		}
+		// foreach($data['friendsInApp'] as $key=>$value){
+		// 	$value->id;
+		// 	$value->name;
+		// }
 		
 		// Buscamos al usuario por email
 		$existUsuario = EntUsuarios::findByEmail ( $data ['profile'] ['email'] );
@@ -203,7 +203,7 @@ class ManagerController extends Controller {
 			$entUsuario = new EntUsuarios ();
 			$entUsuario->addDataFromFaceBook ( $data );
 			
-			$existUsuario = $entUsuario->signup ();
+			$existUsuario = $entUsuario->signup (true);
 		}
 		
 		// Buscamos si existe la cuenta de facebook en la base de datos

@@ -50,7 +50,7 @@ function statusChangeCallback(response) {
 				
 			}else{
 				// Logged into your app and Facebook.
-				window.location.replace('http://notei.com.mx/test/wwwLogin/web/callback-facebook');
+				window.location.replace('<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['CALLBACK_URL']?>');
 				//window.location.replace('http://notei.com.mx/test/wwwComiteConcursante/index.php/usrUsuarios/callbackFacebook/t/3c391e5c9feec1f95282a36bdd5d41ba');
 //				window.location
 //						.replace('https://hazclicconmexico.comitefotomx.com/concursar/usrUsuarios/callbackFacebook/t/3c391e5c9feec1f95282a36bdd5d41ba');
@@ -98,8 +98,7 @@ function checkLoginState() {
 
 window.fbAsyncInit = function() {
 	FB.init({
-		//appId : '1029875693761281',
-		appId:'1754524001428992',
+		appId:'<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['APP_ID']?>',
 		cookie : true, // enable cookies to allow the server to access
 		// the session
 		xfbml : true, // parse social plugins on this page

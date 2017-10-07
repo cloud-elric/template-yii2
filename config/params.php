@@ -4,12 +4,12 @@ return [
     'adminEmail' => 'admin@example.com',
     'modUsuarios' => [
         'facebook'=>[
-            'usarLoginFacebook'=>true,
+            'usarLoginFacebook'=>false,
             'APP_ID'=>'', // Identificador de la aplicación
             'APP_SECRET'=>'', // Clave secreta de la aplicación
             'CALLBACK_URL'=>'',
             'dataBasic'=>true, // Obtiene datos basicos del usuario como nombre, imagen, apellido, email
-            'friends'=>true, // Visualiza a los amigos que esten usuando la aplicacion
+            'friends'=>false, // Visualiza a los amigos que esten usuando la aplicacion
             'permisosForzosos'=>'email, user_friends',
             'permisos'=>'public_profile, email, user_friends',
         ],
