@@ -6,9 +6,13 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+$this->registerCssFile(
+    '@web/webassets/css/login3.css',
+    ['depends' => [\yii\web\JqueryAsset::className()]]
+);
 
 if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){
 ?>
@@ -121,44 +125,57 @@ window.fbAsyncInit = function() {
 </script>
 
 <?php }?>
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="panel">
+        	<div class="panel-body">
+          		<div class="brand">
+            		<!-- <img class="brand-img" src="../../assets//images/logo-blue.png" alt="..."> -->
+            		<h2 class="brand-text font-size-18 text-center"><?= Html::encode($this->title) ?></h2>
+          		</div>
+				<?php 
+				$form = ActiveForm::begin([
+						'id' => 'form-ajax',
+						//'options' => ['class' => 'form-horizontal'],
+						'enableAjaxValidation' => true,
+						'enableClientValidation'=>true,
+					]); 
+				?>
 
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+				<?= $form->field($model, 'username')->textInput(['placeholder'=>'Usuario'])->label(false) ?>
 
-    <p>Please fill out the following fields to login:</p>
+        		<?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Contraseña'])->label(false) ?>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
-
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
-
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-        </div>
-
-    <?php ActiveForm::end(); ?>
-    
-    <?php if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){?>
-    
-<button type="button" class="btn btn-blue btn-facebook"
-					onClick="logInWithFacebook()" scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
-					<i class="fa fa-facebook"></i> Ingresar con Facebook
-				</button>
-<?php }?>				
+				<div class="form-group clearfix">
+					<div class="checkbox-custom checkbox-inline checkbox-primary checkbox-lg pull-left">
+						<?= $form->field($model, 'rememberMe')->checkbox([
+							'template' => "{input} {label}",
+						]) ?>
+            
 				
-   
+					
+						<!-- <input type="checkbox" id="inputCheckbox" name="remember">
+						<label for="inputCheckbox">Remember me</label> -->
+					</div>
+					<a class="pull-right" href="<?=Url::base()."/peticion-pass"?>">¿Olvidé mi contraseña?</a>
+				</div>
+				<?= Html::submitButton('<span class="ladda-label">Login</span>', ["data-style"=>"zoom-in", 'class' => 'btn btn-primary btn-block btn-lg margin-top-15  ladda-button', 'name' => 'login-button']) ?>
+				<?php 
+				if(Yii::$app->params ['modUsuarios'] ['facebook'] ['usarLoginFacebook']){
+				?>
+				<button type="button" class="btn btn-block btn-lg btn-facebook margin-top-15  ladda-button"
+					data-style="zoom-in" onClick="logInWithFacebook()"
+					 scope="<?=Yii::$app->params ['modUsuarios'] ['facebook'] ['permisos']?>">
+					 <span class="ladda-label"><i class="fa fa-facebook"></i> Ingresar con Facebook</span>
+				</button>
+				<?php 
+				}
+				?>
+
+				<?php ActiveForm::end(); ?>
+          		<p class="margin-top-15">¿Aún no tienes una cuenta? <a href="<?=Url::base()."/sign-up"?>">Registrate</a></p>
+        	</div>
+      	</div>
+      
+    </div>  							
 </div>

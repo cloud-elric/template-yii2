@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use app\modules\ModUsuarios\models\Utils;
 use kartik\password\StrengthValidator;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "ent_usuarios".
@@ -39,6 +40,7 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	const STATUS_BLOCKED = 3;
 	public $password;
 	public $repeatPassword;
+	public $image;
 	
 	/**
 	 * @inheritdoc
@@ -56,7 +58,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						'password',
 						'compare',
 						'compareAttribute' => 'repeatPassword',
-						'on' => 'registerInput' 
+						'on' => 'registerInput',
+						'message'=>'Las contraseñas deben coincidir'
 				],
 				[ 
 						'txt_email',
@@ -79,21 +82,31 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'txt_email' 
 						],
 						'required',
-						'on' => 'registerInput' 
+						'on' => 'registerInput',
+						'message'=>'Campo requerido'
 				],
-				[ 
-						[ 
-								'password'
-						],
-						StrengthValidator::className (),
-						'min' => 10,
-						'digit' => 2,
-						'special' => 2,
-						'upper'=>2,
-						'lower'=>2,
-						'special'=>2,
-						'hasUser'=>false,
+				// [ 
+				// 		[ 
+				// 				'password'
+				// 		],
+				// 		// StrengthValidator::className (),
+				// 		// 'min' => 10,
+				// 		// 'digit' => 2,
+				// 		// 'special' => 2,
+				// 		// 'upper'=>2,
+				// 		// 'lower'=>2,
+				// 		// 'special'=>2,
+				// 		// 'hasUser'=>false,
 						
+				// ],
+				[ 
+						[ 
+								'password',
+								'repeatPassword' 
+						],
+						'required',
+						'on' => 'registerInput',
+						'message'=>'Campo requerido' 
 				],
 				[ 
 						[ 
@@ -101,15 +114,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'repeatPassword' 
 						],
 						'required',
-						'on' => 'registerInput' 
-				],
-				[ 
-						[ 
-								'password',
-								'repeatPassword' 
-						],
-						'required',
-						'on' => 'cambiarPass' 
+						'on' => 'cambiarPass',
+						'message'=>'Campo requerido' 
 				],
 				[ 
 						[ 
@@ -126,7 +132,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'txt_email' 
 						],
 						'string',
-						'max' => 255 
+						'max' => 255,
+						'message'=>'Solo puede ingresar 255 caracteres' 
 				],
 				[ 
 						[ 
@@ -134,7 +141,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 								'txt_apellido_materno' 
 						],
 						'string',
-						'max' => 30 
+						'max' => 30,
+						'message'=>'Solo puede ingresar 30 caracteres' 
 				],
 				[ 
 						[ 
@@ -147,7 +155,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						[ 
 								'txt_email' 
 						],
-						'unique' 
+						'unique',
+						'message'=>'El email ya se encuentra registrado'  
 				],
 				[ 
 						[ 
@@ -395,15 +404,26 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		}
 		
 		$user = new EntUsuarios ();
+
+		$user->image = UploadedFile::getInstance($this, 'image');
+
 		$user->txt_token = Utils::generateToken ( 'usr' );
 		$user->txt_username = $this->txt_username;
 		$user->txt_apellido_paterno = $this->txt_apellido_paterno;
 		$user->txt_apellido_materno = $this->txt_apellido_materno;
 		$user->txt_email = $this->txt_email;
+		if($user->image){
+			$user->txt_imagen = $user->txt_token.".".$user->image->extension;
+			if(!$user->upload()){
+				return null;
+			}
+		}
 		$user->setPassword ( $this->password );
 		$user->generateAuthKey ();
 		$user->fch_creacion = Utils::getFechaActual ();
 		$user->id_tipo_usuario = 1;
+
+		
 		
 		// Si esta activada la opcion de mandar correo de activación el usuario estara en status pendiente
 		if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion'] && !$isFacebook) {
@@ -414,6 +434,22 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		
 		return $user->save () ? $user : null;
 	}
+
+
+	public function upload()
+    {
+		$path = "profiles/".$this->txt_token;
+		if (!file_exists($path)) {
+			mkdir($path, 0777, true);
+		}
+       
+    	if($this->image->saveAs($path."/".$this->txt_imagen)){
+			return true;
+		}else{
+			return false;	
+		}
+            
+    }
 	
 	/**
 	 * Agregamos los datos para el usuario

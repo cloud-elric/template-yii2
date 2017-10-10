@@ -1,20 +1,30 @@
 <?php
-
-$params = require(__DIR__ . '/params.php');
-$db = require(__DIR__ . '/db.php');
+$params = require (__DIR__ . '/params.php');
+$db = require (__DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'modules' => [ 
-        'modUsuarios' => [ 
-            'class' => 'app\modules\ModUsuarios\ModUsuarios' 
-        ] 
+    'modules' => [
+        'modUsuarios' => [
+            'class' => 'app\modules\ModUsuarios\ModUsuarios'
+        ]
     ],
     'components' => [
-        'session' => [ 
-            'timeout'=> 31536000 // Segundos que durara la sesion
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js' => []
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [],
+                ],
+
+            ],
+        ],
+        'session' => [
+            'timeout' => 31536000 // Segundos que durara la sesion
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -23,27 +33,27 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [ 
+        'user' => [
             'identityClass' => 'app\modules\ModUsuarios\models\EntUsuarios',
             'enableAutoLogin' => true,
             'authTimeout' => 31536000, // Segundos que durara la sesion
-            'loginUrl' => [ 
-                'modUsuarios/manager/login' 
-            ] 
+            'loginUrl' => [
+                'modUsuarios/manager/login'
+            ]
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [ 
+        'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'transport' => [ 
+            'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => '', // e.g. smtp.mandrillapp.com or smtp.gmail.com
                 'username' => '',
                 'password' => '',
                 'port' => '', // Port 25 is a very common port too
-                'encryption' => '' 
-            ] 
+                'encryption' => ''
+            ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -55,13 +65,13 @@ $config = [
             ],
         ],
         'db' => $db,
-        'urlManager' => [ 
+        'urlManager' => [
             'class' => 'yii\web\UrlManager',
             // Disable index.php
             'showScriptName' => false,
             // Disable r= routes
             'enablePrettyUrl' => true,
-            
+
             'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -75,7 +85,7 @@ $config = [
                 'sign-up' => 'modUsuarios/manager/sign-up',
                 'login' => 'modUsuarios/manager/login',
                 'callback-facebook' => 'modUsuarios/manager/callback-facebook',
-                '/' => 'site/index' 
+                '/' => 'site/index'
             ]
         ]
     ],

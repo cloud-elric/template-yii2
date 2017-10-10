@@ -1,0 +1,15 @@
+body{
+    background-color: #f1f4f5;
+}
+
+.page-copyright-inverse {
+    color: #000;
+}
+
+.page-copyright-inverse .social .icon {
+    color: #000;
+}
+
+.page-copyright-inverse .social .icon:hover {
+    color: #000;
+}

@@ -17,15 +17,19 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Poner descripcion de proyecto">
+    <meta name="author" content="2 Geeks one Monkey">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
 	 <script>
-        var baseUrl = "<?=Yii::$app->urlManager->createAbsoluteUrl ( [''] )?>";
+        var baseUrl = "<?= Yii::$app->urlManager->createAbsoluteUrl(['']) ?>";
     </script>
     <?php $this->head() ?>
 </head>
 <body>
+<div class="animsition">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -43,18 +47,14 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/login']]
-            ) : (
-                '<li>'
+            Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/login']]) : ('<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->txt_username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+                'Logout (' . Yii::$app->user->identity->txt_username . ')',
+                ['class' => 'btn btn-link logout']
             )
+                . Html::endForm()
+                . '</li>')
         ],
     ]);
     NavBar::end();
@@ -77,6 +77,7 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+</div>
 </body>
 </html>
 <?php $this->endPage() ?>

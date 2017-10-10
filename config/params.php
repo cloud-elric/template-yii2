@@ -2,9 +2,10 @@
 
 return [
     'adminEmail' => 'admin@example.com',
+    'developmentBy'=>'2 Geeks one Monkey',
     'modUsuarios' => [
         'facebook'=>[
-            'usarLoginFacebook'=>false,
+            'usarLoginFacebook'=>true,
             'APP_ID'=>'', // Identificador de la aplicación
             'APP_SECRET'=>'', // Clave secreta de la aplicación
             'CALLBACK_URL'=>'',
@@ -18,7 +19,7 @@ return [
             'sesionUnicaPorUsuario' => true, // Solamente habra una sesión por usuario
             'cerrarPrimeraSesion' => true // Cierra la primera sesion abierta para una nueva sesion 
         ],
-        'mandarCorreoActivacion' => true, // Envia correo electronico para activar la cuenta del usuario
+        'mandarCorreoActivacion' => false, // Envia correo electronico para activar la cuenta del usuario
             'email' => [ 
                 'emailActivacion' => 'development@2gom.com.mx',
                 'subjectActivacion' => 'Bienvenido',
