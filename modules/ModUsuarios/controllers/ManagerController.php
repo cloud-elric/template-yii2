@@ -13,11 +13,39 @@ use app\modules\ModUsuarios\models\EntUsuariosCambioPass;
 use app\modules\ModUsuarios\models\EntUsuariosFacebook;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\filters\AccessControl;
 
 /**
  * Default controller for the `musuarios` module
  */
 class ManagerController extends Controller {
+
+	/**
+     * @inheritdoc
+     */
+     public function behaviors()
+     {
+         return [
+             'access' => [
+                 'class' => AccessControl::className(),
+                 'only' => ['profile'],
+                 'rules' => [
+                     [
+                         'actions' => ['profile'],
+                         'allow' => true,
+                         'roles' => ['@'],
+                     ],
+                   
+                 ],
+             ],
+            // 'verbs' => [
+            //     'class' => VerbFilter::className(),
+            //     'actions' => [
+            //         'logout' => ['post'],
+            //     ],
+            // ],
+        ];
+    }
 
 	public $layout = "@app/views/layouts/mainBlank";
 	
@@ -185,6 +213,13 @@ class ManagerController extends Controller {
 		return $this->render ( 'login', [ 
 				'model' => $model 
 		] );
+	}
+
+	public function actionProfile(){
+		$this->layout = "@app/views/layouts/main";
+		$usuario = Yii::$app->user->identity;
+
+		return $this->render('profile', ['model'=>$usuario]);
 	}
 	
 	/**

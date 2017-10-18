@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -23,61 +24,51 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-	 <script>
-        var baseUrl = "<?= Yii::$app->urlManager->createAbsoluteUrl(['']) ?>";
+    <script src="<?= Url::base() ?>/webAssets/js/breakpoints.js"></script>
+    <script>
+      Breakpoints();
     </script>
+    <script>
+          var baseUrl = "<?= Yii::$app->urlManager->createAbsoluteUrl(['']) ?>";
+      </script>
     <?php $this->head() ?>
 </head>
-<body>
-<div class="animsition">
-<?php $this->beginBody() ?>
+<body class="site-menubar-unfold">
+  <div class="animsition">
+  <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'Donativos',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/login']]) : ('<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->txt_username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-                . Html::endForm()
-                . '</li>')
-        ],
-    ]);
-    NavBar::end();
-    ?>
+  <!-- Navbar -->
+  <?= $this->render("nav-bar") ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+  <!-- Side menu -->
+  <?= $this->render("side-menu") ?>
+
+  <!-- Page -->
+  <div class="page">
+    <div class="page-header">
+      <h1 class="page-title"><?= Html::encode($this->title) ?></h1>
+    </div>
+      <div class="page-content">
+        
         <?= $content ?>
-    </div>
-</div>
+      </div>
+  </div>
+  <!-- End Page -->
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; Nombre compañia <?= date('Y') ?></p>
+  <!-- Footer -->
+  <?=$this->render("footer")?>
 
-        <p class="pull-right">Powered by <a href="www.2gom.com.mx">2 Geeks one Monkey</a></p>
-    </div>
-</footer>
-
-<?php $this->endBody() ?>
-</div>
+  <?php $this->endBody() ?>
+  </div>
+  <script>
+  (function(document, window, $) {
+    'use strict';
+    var Site = window.Site;
+    $(document).ready(function() {
+      Site.run();
+    });
+  })(document, window, jQuery);
+  </script>
 </body>
 </html>
 <?php $this->endPage() ?>

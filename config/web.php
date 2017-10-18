@@ -6,12 +6,18 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'name'=>'Nombre de proyecto',
+    'language'=>'es',
     'modules' => [
         'modUsuarios' => [
             'class' => 'app\modules\ModUsuarios\ModUsuarios'
         ]
     ],
     'components' => [
+
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapPluginAsset' => [
@@ -47,12 +53,12 @@ $config = [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'transport' => [
-                'class' => 'Swift_SmtpTransport',
+                'class' => '',
                 'host' => '', // e.g. smtp.mandrillapp.com or smtp.gmail.com
                 'username' => '',
                 'password' => '',
                 'port' => '', // Port 25 is a very common port too
-                'encryption' => ''
+                'encryption' => '' 
             ]
         ],
         'log' => [
@@ -85,6 +91,7 @@ $config = [
                 'sign-up' => 'modUsuarios/manager/sign-up',
                 'login' => 'modUsuarios/manager/login',
                 'callback-facebook' => 'modUsuarios/manager/callback-facebook',
+                'profile' => 'modUsuarios/manager/profile',
                 '/' => 'site/index'
             ]
         ]

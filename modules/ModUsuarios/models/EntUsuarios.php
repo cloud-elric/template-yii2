@@ -305,6 +305,17 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 				'id_status' => self::STATUS_ACTIVED
 		] );
 	}
+
+	/**
+	 * Busca un usuario por token
+	 * @param string $token
+	 * @return EntUsuarios|null
+	 */
+	public static function findByToken($token){
+		return static::findOne ( [ 
+			'txt_token' => $token,
+	] );
+	}
 	
 	/**
 	 * Finds user by password reset token
@@ -492,5 +503,37 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	public function bloquearUsuario() {
 		$this->id_status = self::STATUS_BLOCKED;
 		return $this->save () ? $this : null;
+	}
+
+	/**
+	 * Si la imagen esta vacia mandamos una por default
+	 *
+	 * @return string
+	 */
+	 public function getImageProfile() {
+		$basePath = Yii::getAlias ( '@web' );
+		
+		$usuarioFacebook = $this->entUsuariosFacebook;
+		
+		if(empty($usuarioFacebook)){
+			if ($this->txt_imagen) {
+				return $basePath . '/profiles/' . $this->txt_token."/". $this->txt_imagen;
+			}
+			
+			return $basePath . '/webAssets/images/site/user.png';
+		}
+		
+		return 'http://graph.facebook.com/'.$usuarioFacebook->id_facebook.'/picture';
+		
+	}
+
+	public function isRegisterFaceBook(){
+		$usuarioFacebook = $this->entUsuariosFacebook;
+		
+		if(empty($usuarioFacebook)){
+			return false;
+		} else{
+			return $usuarioFacebook;
+		}
 	}
 }

@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -23,6 +24,10 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <script src="<?=Url::base()?>/webAssets/js/breakpoints.js"></script>
+    <script>
+      Breakpoints();
+    </script>
 	 <script>
         var baseUrl = "<?= Yii::$app->urlManager->createAbsoluteUrl(['']) ?>";
     </script>
@@ -56,6 +61,15 @@ AppAsset::register($this);
             <?php $this->endBody() ?>
         </div>    
     </div>
+    <script>
+(function(document, window, $) {
+  'use strict';
+  var Site = window.Site;
+  $(document).ready(function() {
+    Site.run();
+  });
+})(document, window, jQuery);
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>
