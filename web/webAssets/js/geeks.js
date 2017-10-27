@@ -4,7 +4,16 @@
 $(document).ready(function() {
     // Animación entre pantallas
       $(".animsition").animsition({
-        transition: function(url){}
+        transition: function(url){},
+        loading : false
+      });
+      
+      $('.animsition').on('animsition.inStart', function() {
+        $(".animsition-loading").hide();
+      });
+    
+      $('.animsition').on('animsition.outStart', function() {
+        $(".animsition-loading").show();
       });
   
       // Cargador en todos los botones con la clase ladda
