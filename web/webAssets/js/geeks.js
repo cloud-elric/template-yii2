@@ -9,11 +9,11 @@ $(document).ready(function() {
       });
       
       $('.animsition').on('animsition.inStart', function() {
-        $(".animsition-loading").hide();
+        $(".loader-overlay").hide();
       });
     
       $('.animsition').on('animsition.outStart', function() {
-        $(".animsition-loading").show();
+        $(".loader-overlay").show();
       });
   
       // Cargador en todos los botones con la clase ladda

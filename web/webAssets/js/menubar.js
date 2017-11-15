@@ -1,314 +1,326 @@
-/*!
- * remark (http://getbootstrapadmin.com/remark)
- * Copyright 2015 amazingsurge
- * Licensed under the Themeforest Standard Licenses
- */
-(function(window, document, $) {
-    'use strict';
-  
-    var $body = $('body'),
-      $html = $('html');
-  
-    $.site.menubar = {
-      opened: null,
-      folded: null,
-      top: false,
-      foldAlt: false,
-      $instance: null,
-      auto: true,
-  
-      init: function() {
-        $html.removeClass('css-menubar').addClass('js-menubar');
-  
-        this.$instance = $(".site-menubar");
-  
-        if (this.$instance.length === 0) {
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define('/Section/Menubar', ['exports', 'jquery', 'Component'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('jquery'), require('Component'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.jQuery, global.Component);
+    global.SectionMenubar = mod.exports;
+  }
+})(this, function (exports, _jquery, _Component2) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _jquery2 = babelHelpers.interopRequireDefault(_jquery);
+
+  var _Component3 = babelHelpers.interopRequireDefault(_Component2);
+
+  var $BODY = (0, _jquery2.default)('body');
+  var $HTML = (0, _jquery2.default)('html');
+
+  var Scrollable = function () {
+    function Scrollable($el) {
+      babelHelpers.classCallCheck(this, Scrollable);
+
+      this.$el = $el;
+      this.native = false;
+      this.api = null;
+
+      this.init();
+    }
+
+    babelHelpers.createClass(Scrollable, [{
+      key: 'init',
+      value: function init() {
+        if ($BODY.is('.site-menubar-native')) {
+          this.native = true;
           return;
         }
-  
-        var self = this;
-  
-        if ($body.is('.site-menubar-top')) {
-          this.top = true;
-        }
-  
-        if ($body.is('.site-menubar-fold-alt')) {
-          this.foldAlt = true;
-        }
-  
-        if ($body.data('autoMenubar') === false || $body.is('.site-menubar-keep')) {
-          if ($body.hasClass('site-menubar-fold')) {
-            this.auto = 'fold';
-          } else if ($body.hasClass('site-menubar-unfold')) {
-            this.auto = 'unfold';
-          }
-        }
-  
-        this.$instance.on('changed.site.menubar', function() {
-          self.update();
-        });
-  
-        this.change();
-      },
-  
-      change: function() {
-        var breakpoint = Breakpoints.current();
-        if (this.auto !== true) {
-          switch (this.auto) {
-            case 'fold':
-              this.reset();
-              if (breakpoint.name == 'xs') {
-                this.hide();
-              } else {
-                this.fold();
-              }
-              return;
-            case 'unfold':
-              this.reset();
-              if (breakpoint.name == 'xs') {
-                this.hide();
-              } else {
-                this.unfold();
-              }
-              return;
-          }
-        }
-  
-        this.reset();
-  
-        if (breakpoint) {
-          switch (breakpoint.name) {
-            case 'lg':
-              this.unfold();
-              break;
-            case 'md':
-            case 'sm':
-              this.fold();
-              break;
-            case 'xs':
-              this.hide();
-              break;
-          }
-        }
-      },
-  
-      animate: function(doing, callback) {
-        var self = this;
-        $body.addClass('site-menubar-changing');
-  
-        doing.call(self);
-        this.$instance.trigger('changing.site.menubar');
-  
-        setTimeout(function() {
-          callback.call(self);
-          $body.removeClass('site-menubar-changing');
-  
-          self.$instance.trigger('changed.site.menubar');
-        }, 500);
-      },
-  
-      reset: function() {
-        this.opened = null;
-        this.folded = null;
-        $body.removeClass('site-menubar-hide site-menubar-open site-menubar-fold site-menubar-unfold');
-        $html.removeClass('disable-scrolling');
-      },
-  
-      open: function() {
-        if (this.opened !== true) {
-          this.animate(function() {
-            $body.removeClass('site-menubar-hide').addClass('site-menubar-open site-menubar-unfold');
-            this.opened = true;
-  
-            $html.addClass('disable-scrolling');
-  
-          }, function() {
-            this.scrollable.enable();
-          });
-        }
-      },
-  
-      hide: function() {
-        this.hoverscroll.disable();
-  
-        if (this.opened !== false) {
-          this.animate(function() {
-  
-            $html.removeClass('disable-scrolling');
-            $body.removeClass('site-menubar-open').addClass('site-menubar-hide site-menubar-unfold');
-            this.opened = false;
-  
-          }, function() {
-            this.scrollable.enable();
-          });
-        }
-      },
-  
-      unfold: function() {
-        this.hoverscroll.disable();
-  
-        if (this.folded !== false) {
-          this.animate(function() {
-            $body.removeClass('site-menubar-fold').addClass('site-menubar-unfold');
-            this.folded = false;
-  
-          }, function() {
-            this.scrollable.enable();
-  
-            if (this.folded !== null) {
-              $.site.resize();
-            }
-          });
-        }
-      },
-  
-      fold: function() {
-        this.scrollable.disable();
-  
-        if (this.folded !== true) {
-          this.animate(function() {
-  
-            $body.removeClass('site-menubar-unfold').addClass('site-menubar-fold');
-            this.folded = true;
-  
-          }, function() {
-            this.hoverscroll.enable();
-  
-            if (this.folded !== null) {
-              $.site.resize();
-            }
-          });
-        }
-      },
-  
-      toggle: function() {
-        var breakpoint = Breakpoints.current();
-        var folded = this.folded;
-        var opened = this.opened;
-  
-        switch (breakpoint.name) {
-          case 'lg':
-            if (folded === null || folded === false) {
-              this.fold();
-            } else {
-              this.unfold();
-            }
-            break;
-          case 'md':
-          case 'sm':
-            if (folded === null || folded === true) {
-              this.unfold();
-            } else {
-              this.fold();
-            }
-            break;
-          case 'xs':
-            if (opened === null || opened === false) {
-              this.open();
-            } else {
-              this.hide();
-            }
-            break;
-        }
-      },
-  
-      update: function() {
-        this.scrollable.update();
-        this.hoverscroll.update();
-      },
-  
-      scrollable: {
-        api: null,
-        native: false,
-        init: function() {
-          // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-          //   this.native = true;
-          //   $body.addClass('site-menubar-native');
-          //   return;
-          // }
-  
-          if ($body.is('.site-menubar-native')) {
-            this.native = true;
-            return;
-          }
-  
-          this.api = $.site.menubar.$instance.children('.site-menubar-body').asScrollable({
-            namespace: 'scrollable',
-            skin: 'scrollable-inverse',
-            direction: 'vertical',
-            contentSelector: '>',
-            containerSelector: '>'
-          }).data('asScrollable');
-        },
-  
-        update: function() {
-          if (this.api) {
-            this.api.update();
-          }
-        },
-  
-        enable: function() {
-          if (this.native) {
-            return;
-          }
-          if (!this.api) {
-            this.init();
-          }
-          if (this.api) {
-            this.api.enable();
-          }
-        },
-  
-        disable: function() {
-          if (this.api) {
-            this.api.disable();
-          }
-        }
-      },
-  
-      hoverscroll: {
-        api: null,
-  
-        init: function() {
-          this.api = $.site.menubar.$instance.children('.site-menubar-body').asHoverScroll({
-            namespace: 'hoverscorll',
-            direction: 'vertical',
-            list: '.site-menu',
-            item: '> li',
-            exception: '.site-menu-sub',
-            fixed: false,
-            boundary: 100,
-            onEnter: function() {
-              //$(this).siblings().removeClass('hover');
-              //$(this).addClass('hover');
-            },
-            onLeave: function() {
-              //$(this).removeClass('hover');
-            }
-          }).data('asHoverScroll');
-        },
-  
-        update: function() {
-          if (this.api) {
-            this.api.update();
-          }
-        },
-  
-        enable: function() {
-          if (!this.api) {
-            this.init();
-          }
-          if (this.api) {
-            this.api.enable();
-          }
-        },
-  
-        disable: function() {
-          if (this.api) {
-            this.api.disable();
-          }
+
+        this.api = this.$el.asScrollable({
+          namespace: 'scrollable',
+          skin: 'scrollable-inverse',
+          direction: 'vertical',
+          contentSelector: '>',
+          containerSelector: '>'
+        }).data('asScrollable');
+      }
+    }, {
+      key: 'update',
+      value: function update() {
+        if (this.api) {
+          this.api.update();
         }
       }
-    };
-  })(window, document, jQuery);
-  
+    }, {
+      key: 'enable',
+      value: function enable() {
+        if (this.native) {
+          return;
+        }
+        if (!this.api) {
+          this.init();
+        }
+        if (this.api) {
+          this.api.enable();
+        }
+      }
+    }, {
+      key: 'disable',
+      value: function disable() {
+        if (this.api) {
+          this.api.disable();
+        }
+      }
+    }]);
+    return Scrollable;
+  }();
+
+  var Hoverscroll = function () {
+    function Hoverscroll($el) {
+      babelHelpers.classCallCheck(this, Hoverscroll);
+
+      this.$el = $el;
+      this.api = null;
+
+      this.init();
+    }
+
+    babelHelpers.createClass(Hoverscroll, [{
+      key: 'init',
+      value: function init() {
+        this.api = this.$el.asHoverScroll({
+          namespace: 'hoverscorll',
+          direction: 'vertical',
+          list: '.site-menu',
+          item: '> li',
+          exception: '.site-menu-sub',
+          fixed: false,
+          boundary: 100,
+          onEnter: function onEnter() {
+            // $(this).siblings().removeClass('hover');
+            // $(this).addClass('hover');
+          },
+          onLeave: function onLeave() {
+            // $(this).removeClass('hover');
+          }
+        }).data('asHoverScroll');
+      }
+    }, {
+      key: 'update',
+      value: function update() {
+        if (this.api) {
+          this.api.update();
+        }
+      }
+    }, {
+      key: 'enable',
+      value: function enable() {
+        if (!this.api) {
+          this.init();
+        }
+        if (this.api) {
+          this.api.enable();
+        }
+      }
+    }, {
+      key: 'disable',
+      value: function disable() {
+        if (this.api) {
+          this.api.disable();
+        }
+      }
+    }]);
+    return Hoverscroll;
+  }();
+
+  var _class = function (_Component) {
+    babelHelpers.inherits(_class, _Component);
+
+    function _class() {
+      var _ref;
+
+      babelHelpers.classCallCheck(this, _class);
+
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var _this = babelHelpers.possibleConstructorReturn(this, (_ref = _class.__proto__ || Object.getPrototypeOf(_class)).call.apply(_ref, [this].concat(args)));
+
+      _this.top = false;
+      _this.folded = false;
+      _this.foldAlt = false;
+      _this.$menuBody = _this.$el.children('.site-menubar-body');
+      _this.$menu = _this.$el.find('[data-plugin=menu]');
+
+      if (_this.$menuBody.length > 0) {
+        _this.initialized = true;
+      } else {
+        _this.initialized = false;
+        return babelHelpers.possibleConstructorReturn(_this);
+      }
+
+      (0, _jquery2.default)('.site-menu-sub').on('touchstart', function (e) {
+        e.stopPropagation();
+      }).on('ponitstart', function (e) {
+        e.stopPropagation();
+      });
+      _this.scrollable = new Scrollable(_this.$menuBody);
+      _this.hoverscroll = new Hoverscroll(_this.$menuBody);
+      return _this;
+    }
+
+    babelHelpers.createClass(_class, [{
+      key: 'processed',
+      value: function processed() {
+        $HTML.removeClass('css-menubar').addClass('js-menubar');
+
+        if ($BODY.is('.site-menubar-top')) {
+          this.top = true;
+        }
+
+        if ($BODY.is('.site-menubar-fold-alt')) {
+          this.foldAlt = true;
+        }
+        this.change(this.getState('menubarType'));
+      }
+    }, {
+      key: 'getDefaultState',
+      value: function getDefaultState() {
+        return {
+          menubarType: 'unfold' // unfold, fold, open, hide;
+        };
+      }
+    }, {
+      key: 'getDefaultActions',
+      value: function getDefaultActions() {
+        return {
+          menubarType: 'change'
+        };
+      }
+    }, {
+      key: 'getMenuApi',
+      value: function getMenuApi() {
+        return this.$menu.data('menuApi');
+      }
+    }, {
+      key: 'setMenuData',
+      value: function setMenuData() {
+        var api = this.getMenuApi();
+
+        if (api) {
+          api.folded = this.folded;
+          api.foldAlt = this.foldAlt;
+          api.outerHeight = this.$el.outerHeight();
+        }
+      }
+    }, {
+      key: 'update',
+      value: function update() {
+        this.scrollable.update();
+        this.hoverscroll.update();
+      }
+    }, {
+      key: 'change',
+      value: function change(type) {
+        if (this.initialized) {
+          this.reset();
+          this[type]();
+          this.setMenuData();
+        }
+      }
+    }, {
+      key: 'animate',
+      value: function animate(doing) {
+        var _this2 = this;
+
+        var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+        $BODY.addClass('site-menubar-changing');
+
+        doing.call(this);
+
+        this.$el.trigger('changing.site.menubar');
+
+        var menuApi = this.getMenuApi();
+        if (menuApi) {
+          menuApi.refresh();
+        }
+
+        setTimeout(function () {
+          callback.call(_this2);
+          $BODY.removeClass('site-menubar-changing');
+          _this2.update();
+          _this2.$el.trigger('changed.site.menubar');
+        }, 500);
+      }
+    }, {
+      key: 'reset',
+      value: function reset() {
+        $BODY.removeClass('site-menubar-hide site-menubar-open site-menubar-fold site-menubar-unfold');
+        $HTML.removeClass('disable-scrolling');
+      }
+    }, {
+      key: 'open',
+      value: function open() {
+        this.animate(function () {
+          $BODY.addClass('site-menubar-open site-menubar-unfold');
+
+          $HTML.addClass('disable-scrolling');
+        }, function () {
+          this.scrollable.enable();
+        });
+      }
+    }, {
+      key: 'hide',
+      value: function hide() {
+        this.hoverscroll.disable();
+
+        this.animate(function () {
+          $BODY.addClass('site-menubar-hide site-menubar-unfold');
+        }, function () {
+          this.scrollable.enable();
+        });
+      }
+    }, {
+      key: 'unfold',
+      value: function unfold() {
+        this.hoverscroll.disable();
+
+        this.animate(function () {
+          $BODY.addClass('site-menubar-unfold');
+          this.folded = false;
+        }, function () {
+          this.scrollable.enable();
+
+          this.triggerResize();
+        });
+      }
+    }, {
+      key: 'fold',
+      value: function fold() {
+        this.scrollable.disable();
+
+        this.animate(function () {
+
+          $BODY.addClass('site-menubar-fold');
+          this.folded = true;
+        }, function () {
+          this.hoverscroll.enable();
+
+          this.triggerResize();
+        });
+      }
+    }]);
+    return _class;
+  }(_Component3.default);
+
+  exports.default = _class;
+});

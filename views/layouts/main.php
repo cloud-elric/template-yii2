@@ -19,7 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Poner descripcion de proyecto">
+    <meta name="description" content="Poner descripción de proyecto">
     <meta name="author" content="2 Geeks one Monkey">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
@@ -34,7 +34,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body class="site-menubar-unfold">
-  <div class="animsition-loading"></div>
+  
   <div class="animsition">
   <?php $this->beginBody() ?>
 
@@ -50,7 +50,6 @@ AppAsset::register($this);
       <h1 class="page-title"><?= Html::encode($this->title) ?></h1>
     </div>
       <div class="page-content">
-        
         <?= $content ?>
       </div>
   </div>
@@ -71,5 +70,16 @@ AppAsset::register($this);
   })(document, window, jQuery);
   </script>
 </body>
+<div class="loader-overlay">
+      <div class="loader-content">
+        <div class="loader-index">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div></div>
 </html>
 <?php $this->endPage() ?>

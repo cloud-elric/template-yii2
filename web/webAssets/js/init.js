@@ -1,0 +1,3 @@
+
+Config.set('assets', '/');
+  

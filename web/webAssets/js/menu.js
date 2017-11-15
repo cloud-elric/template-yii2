@@ -1,103 +1,134 @@
-/*!
- * remark (http://getbootstrapadmin.com/remark)
- * Copyright 2015 amazingsurge
- * Licensed under the Themeforest Standard Licenses
- */
-(function(window, document, $) {
-    'use strict';
-  
-    $.site.menu = {
-      speed: 250,
-      accordion: true, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-  
-      init: function() {
-        this.$instance = $('.site-menu');
-  
-        if (this.$instance.length === 0) {
-          return;
-        }
-  
-        this.bind();
-      },
-  
-      bind: function() {
+(function (global, factory) {
+  if (typeof define === "function" && define.amd) {
+    define('/Plugin/menu', ['exports', 'Plugin'], factory);
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('Plugin'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.Plugin);
+    global.PluginMenu = mod.exports;
+  }
+})(this, function (exports, _Plugin2) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _Plugin3 = babelHelpers.interopRequireDefault(_Plugin2);
+
+  var NAME = 'menu';
+
+  var Menu = function (_Plugin) {
+    babelHelpers.inherits(Menu, _Plugin);
+
+    function Menu() {
+      var _ref;
+
+      babelHelpers.classCallCheck(this, Menu);
+
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var _this = babelHelpers.possibleConstructorReturn(this, (_ref = Menu.__proto__ || Object.getPrototypeOf(Menu)).call.apply(_ref, [this].concat(args)));
+
+      _this.folded = true;
+      _this.foldAlt = true;
+      _this.outerHeight = 0;
+      return _this;
+    }
+
+    babelHelpers.createClass(Menu, [{
+      key: 'getName',
+      value: function getName() {
+        return NAME;
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        this.bindEvents();
+        this.$el.data('menuApi', this);
+      }
+    }, {
+      key: 'bindEvents',
+      value: function bindEvents() {
         var self = this;
-  
-        this.$instance.on('mouseenter.site.menu', '.site-menu-item', function() {
+
+        this.$el.on('mouseenter.site.menu', '.site-menu-item', function () {
           var $item = $(this);
-          if ($.site.menubar.folded === true && $item.is('.has-sub') && $item.parent('.site-menu').length > 0) {
+          if (self.folded === true && $item.is('.has-sub') && $item.parent('.site-menu').length > 0) {
             var $sub = $item.children('.site-menu-sub');
             self.position($item, $sub);
           }
-  
           $item.addClass('hover');
-        }).on('mouseleave.site.menu', '.site-menu-item', function() {
+        }).on('mouseleave.site.menu', '.site-menu-item', function () {
           var $item = $(this);
-          if ($.site.menubar.folded === true && $item.is('.has-sub') && $item.parent('.site-menu').length > 0) {
-            $item.children('.site-menu-sub').css("max-height", "");
+          if (self.folded === true && $item.is('.has-sub') && $item.parent('.site-menu').length > 0) {
+            $item.children('.site-menu-sub').css('max-height', '');
+            $item.removeClass('open');
           }
-  
           $item.removeClass('hover');
-        }).on('deactive.site.menu', '.site-menu-item.active', function(e) {
-          var $item = $(this);
-  
-          $item.removeClass('active');
-  
+        }).on('deactive.site.menu', '.site-menu-item.active', function (e) {
+
+          $(this).removeClass('active');
+
           e.stopPropagation();
-        }).on('active.site.menu', '.site-menu-item', function(e) {
-          var $item = $(this);
-  
-          $item.addClass('active');
-  
+        }).on('active.site.menu', '.site-menu-item', function (e) {
+
+          $(this).addClass('active');
+
           e.stopPropagation();
-        }).on('open.site.menu', '.site-menu-item', function(e) {
+        }).on('open.site.menu', '.site-menu-item', function (e) {
           var $item = $(this);
-  
-          self.expand($item, function() {
+
+          self.expand($item, function () {
             $item.addClass('open');
           });
-  
-          if (self.accordion) {
+
+          if (self.options.accordion) {
             $item.siblings('.open').trigger('close.site.menu');
           }
-  
+
           e.stopPropagation();
-        }).on('close.site.menu', '.site-menu-item.open', function(e) {
+        }).on('close.site.menu', '.site-menu-item.open', function (e) {
           var $item = $(this);
-  
-          self.collapse($item, function() {
+
+          self.collapse($item, function () {
             $item.removeClass('open');
           });
-  
+
           e.stopPropagation();
-        }).on('click.site.menu ', '.site-menu-item', function(e) {
-          if ($(this).is('.has-sub') && $(e.target).closest('.site-menu-item').is(this)) {
-            if ($(this).is('.open')) {
-              $(this).trigger('close.site.menu');
+        }).on('click.site.menu ', '.site-menu-item', function (e) {
+          var $item = $(this);
+
+          if ($item.is('.has-sub') && $(e.target).closest('.site-menu-item').is(this)) {
+            if ($item.is('.open')) {
+              $item.trigger('close.site.menu');
             } else {
-              $(this).trigger('open.site.menu');
+              $item.trigger('open.site.menu');
             }
-          } else {
-            if (!$(this).is('.active')) {
-              $(this).siblings('.active').trigger('deactive.site.menu');
-              $(this).trigger('active.site.menu');
-            }
+          } else if (!$item.is('.active')) {
+            $item.siblings('.active').trigger('deactive.site.menu');
+            $item.trigger('active.site.menu');
           }
-  
+
           e.stopPropagation();
-        }).on('tap.site.menu', '> .site-menu-item > a', function() {
+        }).on('tap.site.menu', '> .site-menu-item > a', function () {
           var link = $(this).attr('href');
-  
+
           if (link) {
             window.location = link;
           }
-        }).on('touchend.site.menu', '> .site-menu-item > a', function(e) {
+        }).on('touchend.site.menu', '> .site-menu-item > a', function () {
           var $item = $(this).parent('.site-menu-item');
-  
-          if ($.site.menubar.folded === true) {
+
+          if (self.folded === true) {
             if ($item.is('.has-sub') && $item.parent('.site-menu').length > 0) {
               $item.siblings('.hover').removeClass('hover');
-  
+
               if ($item.is('.hover')) {
                 $item.removeClass('hover');
               } else {
@@ -105,80 +136,92 @@
               }
             }
           }
-        }).on('scroll.site.menu', '.site-menu-sub', function(e) {
+        }).on('scroll.site.menu', '.site-menu-sub', function (e) {
           e.stopPropagation();
         });
-      },
-  
-      collapse: function($item, callback) {
+      }
+    }, {
+      key: 'collapse',
+      value: function collapse($item, callback) {
         var self = this;
         var $sub = $item.children('.site-menu-sub');
-  
-        $sub.show().slideUp(this.speed, function() {
+
+        $sub.show().slideUp(this.options.speed, function () {
           $(this).css('display', '');
-  
+
           $(this).find('> .site-menu-item').removeClass('is-shown');
-  
+
           if (callback) {
             callback();
           }
-  
-          self.$instance.trigger('collapsed.site.menu');
+
+          self.$el.trigger('collapsed.site.menu');
         });
-      },
-  
-      expand: function($item, callback) {
+      }
+    }, {
+      key: 'expand',
+      value: function expand($item, callback) {
         var self = this;
         var $sub = $item.children('.site-menu-sub');
         var $children = $sub.children('.site-menu-item').addClass('is-hidden');
-  
-        $sub.hide().slideDown(this.speed, function() {
+
+        $sub.hide().slideDown(this.options.speed, function () {
           $(this).css('display', '');
-  
+
           if (callback) {
             callback();
           }
-  
-          self.$instance.trigger('expanded.site.menu');
+
+          self.$el.trigger('expanded.site.menu');
         });
-  
-        setTimeout(function() {
+
+        setTimeout(function () {
           $children.addClass('is-shown');
           $children.removeClass('is-hidden');
         }, 0);
-      },
-  
-      refresh: function() {
-        this.$instance.find('.open').filter(':not(.active)').removeClass('open');
-      },
-  
-      position: function($item, $dropdown) {
-        var offsetTop = $item.position().top,
-          dropdownHeight = $dropdown.outerHeight(),
-          menubarHeight = $.site.menubar.$instance.outerHeight(),
-          itemHeight = $item.find("> a").outerHeight();
-  
-        $dropdown.removeClass('site-menu-sub-up').css('max-height', "");
-  
-        //if (offsetTop + dropdownHeight > menubarHeight) {
+      }
+    }, {
+      key: 'refresh',
+      value: function refresh() {
+        this.$el.find('.open').filter(':not(.active)').removeClass('open');
+      }
+    }, {
+      key: 'position',
+      value: function position($item, $dropdown) {
+        var itemHeight = $item.find('> a').outerHeight(),
+            menubarHeight = this.outerHeight,
+            offsetTop = $item.position().top;
+
+        $dropdown.removeClass('site-menu-sub-up').css('max-height', '');
+
         if (offsetTop > menubarHeight / 2) {
           $dropdown.addClass('site-menu-sub-up');
-  
-          if ($.site.menubar.foldAlt) {
-            offsetTop = offsetTop - itemHeight;
+
+          if (this.foldAlt) {
+            offsetTop -= itemHeight;
           }
-          //if(dropdownHeight > offsetTop + itemHeight) {
           $dropdown.css('max-height', offsetTop + itemHeight);
-          //}
         } else {
-          if ($.site.menubar.foldAlt) {
-            offsetTop = offsetTop + itemHeight;
+          if (this.foldAlt) {
+            offsetTop += itemHeight;
           }
           $dropdown.removeClass('site-menu-sub-up');
           $dropdown.css('max-height', menubarHeight - offsetTop);
         }
-        //}
       }
-    };
-  })(window, document, jQuery);
-  
+    }], [{
+      key: 'getDefaults',
+      value: function getDefaults() {
+        return {
+          speed: 250,
+          accordion: true
+        };
+      }
+    }]);
+    return Menu;
+  }(_Plugin3.default);
+
+  _Plugin3.default.register(NAME, Menu);
+
+  exports.default = Menu;
+});
