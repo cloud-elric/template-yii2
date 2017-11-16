@@ -8,7 +8,7 @@ if(!$usuario){
 }
 
 ?>
- <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
+ <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega navbar-inverse bg-cyan-600" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggler hamburger hamburger-close navbar-toggler-left hided"
       data-toggle="menubar">

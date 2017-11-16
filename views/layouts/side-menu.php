@@ -1,7 +1,7 @@
 <?php
 use \yii\helpers\Url;
 ?>
-<div class="site-menubar">
+<div class="site-menubar site-menubar-light">
     <div class="site-menubar-body">
       <div>
         <div>
