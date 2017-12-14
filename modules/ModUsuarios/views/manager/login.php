@@ -126,7 +126,7 @@ window.fbAsyncInit = function() {
 
 <?php }?>
 <div class="row">
-	<div class="col-md-4 col-md-offset-4">
+	<div class="col-md-4 col offset-md-4">
 		<div class="panel">
         	<div class="panel-body">
           		<div class="brand">
@@ -147,7 +147,7 @@ window.fbAsyncInit = function() {
         		<?= $form->field($model, 'password')->passwordInput(['placeholder'=>'Contraseña'])->label(false) ?>
 
 				<div class="form-group clearfix">
-					<div class="checkbox-custom checkbox-inline checkbox-primary checkbox-lg pull-left">
+					<div class="checkbox-custom checkbox-inline checkbox-primary checkbox-lg float-left">
 						<?= $form->field($model, 'rememberMe')->checkbox([
 							'template' => "{input} {label}",
 						]) ?>
@@ -157,7 +157,7 @@ window.fbAsyncInit = function() {
 						<!-- <input type="checkbox" id="inputCheckbox" name="remember">
 						<label for="inputCheckbox">Remember me</label> -->
 					</div>
-					<a class="pull-right" href="<?=Url::base()."/peticion-pass"?>">¿Olvidé mi contraseña?</a>
+					<a class="float-right" href="<?=Url::base()."/peticion-pass"?>">¿Olvidé mi contraseña?</a>
 				</div>
 				<?= Html::submitButton('<span class="ladda-label">Login</span>', ["data-style"=>"zoom-in", 'class' => 'btn btn-primary btn-block btn-lg margin-top-15  ladda-button', 'name' => 'login-button']) ?>
 				<?php 

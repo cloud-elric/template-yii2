@@ -40,7 +40,7 @@ AppAsset::register($this);
 
             <?= $content ?>
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+                <div class="col-md-6 offset-md-3">
                     <footer class="page-copyright page-copyright-inverse text-center">
                         <p>DEVELOPMENT BY <?=Yii::$app->params ['developmentBy']?></p>
                         <p>© <?=date('Y')?>. Todos los derechos reservados.</p>
