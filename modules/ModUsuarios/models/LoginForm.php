@@ -17,6 +17,17 @@ class LoginForm extends Model {
 	public $rememberMe = true;
 	public $userEncontrado;
 	private $_user = false;
+
+	/**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Nombre de Usuario',
+            'password' => 'Contraseña'
+        ];
+    }
 	
 	/**
 	 *
