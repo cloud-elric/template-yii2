@@ -8,6 +8,7 @@ $config = [
     'bootstrap' => ['log'],
     'name'=>'Nombre de proyecto',
     'language'=>'es',
+    'layout' => 'classic/mainTopBar',
     'modules' => [
         'modUsuarios' => [
             'class' => 'app\modules\ModUsuarios\ModUsuarios'
