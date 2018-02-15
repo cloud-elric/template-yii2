@@ -27,17 +27,20 @@ class AppAssetClassicCore extends AssetBundle
         "vendor/switchery/switchery.css",
         "vendor/intro-js/introjs.css",
         "vendor/slidepanel/slidePanel.css",
+        'vendor/bootstrap-sweetalert/sweetalert.css',
         "vendor/flag-icon-css/flag-icon.css",
         // Fonts
         "fonts/web-icons/web-icons.min.css",
         "fonts/brand-icons/brand-icons.min.css",
         "fonts/7-stroke/7-stroke.css",
-        'http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'
+        'fonts/font-awesome/font-awesome.css',
+        'fonts/octicons/octicons.css',
+        'http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic',
      
     ];
     public $js = [
         'vendor/babel-external-helpers/babel-external-helpers.js',
-        'vendor/jquery/jquery.js',
+        #'vendor/jquery/jquery.js',
         'vendor/tether/tether.js',
         'vendor/bootstrap/bootstrap.js',
         'vendor/animsition/animsition.js',
@@ -48,6 +51,8 @@ class AppAssetClassicCore extends AssetBundle
         'vendor/intro-js/intro.js',
         'vendor/screenfull/screenfull.js',
         'vendor/slidepanel/jquery-slidePanel.js',
+        'vendor/jquery-placeholder/jquery.placeholder.js',
+        'vendor/bootstrap-sweetalert/sweetalert.js',
         'js/State.js',
         'js/Component.js',
         'js/Plugin.js',
@@ -56,7 +61,8 @@ class AppAssetClassicCore extends AssetBundle
         'js/config/colors.js',
         'js/Plugin/asscrollable.js',
         'js/Plugin/slidepanel.js',
-        'js/Plugin/switchery.js'
+        'js/Plugin/switchery.js',
+        'js/Plugin/material.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

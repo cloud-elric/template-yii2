@@ -253,11 +253,13 @@
         $BODY.animsition({
           inClass: 'fade-in',
           inDuration: 800,
+          //linkElement:'a:not([class="no-redirect"]):not([target="_blank"]):not([href^="#"])',
           loading: true,
           loadingClass: 'loader-overlay',
           loadingParentElement: 'html',
           loadingInner: '\n      <div class="loader-content">\n        <div class="loader-index">\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>',
-          onLoadEvent: true
+          onLoadEvent: true,
+          transition: function(url){},
         });
       }
     }, {

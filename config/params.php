@@ -20,7 +20,7 @@ return [
             'sesionUnicaPorUsuario' => true, // Solamente habra una sesión por usuario
             'cerrarPrimeraSesion' => true // Cierra la primera sesion abierta para una nueva sesion 
         ],
-        'mandarCorreoActivacion' => true, // Envia correo electronico para activar la cuenta del usuario
+        'mandarCorreoActivacion' => false, // Envia correo electronico para activar la cuenta del usuario
             'email' => [ 
                 'emailActivacion' => 'development@2gom.com.mx',
                 'subjectActivacion' => 'Bienvenido',

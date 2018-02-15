@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=crm_core',
+    'dsn' => 'mysql:host=localhost;dbname=template-core',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

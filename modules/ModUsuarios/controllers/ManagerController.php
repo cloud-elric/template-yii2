@@ -219,6 +219,8 @@ class ManagerController extends Controller {
 		$this->layout = "@app/views/layouts/main";
 		$usuario = Yii::$app->user->identity;
 
+		return $this->redirect(["//site/construccion"]);
+
 		return $this->render('profile', ['model'=>$usuario]);
 	}
 	

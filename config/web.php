@@ -27,6 +27,12 @@ $config = [
                 'yii\bootstrap\BootstrapAsset' => [
                     'css' => [],
                 ],
+                'yii\web\JqueryAsset' => [
+                    'baseUrl'=>'@web/webAssets/templates/classic/global/vendor/jquery',
+                    'js' => [ 
+                        'jquery.js',
+                    ],
+                ],
 
             ],
         ],
@@ -35,7 +41,7 @@ $config = [
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'XQj9Zo_rh6cNU7oIkg87sUKvzNM2jc3K',
+            'cookieValidationKey' => 'templateXQj9Zo_rh6cNU7oIkg87sUKvzNM2jc3K',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

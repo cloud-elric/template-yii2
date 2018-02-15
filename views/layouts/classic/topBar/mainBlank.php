@@ -3,10 +3,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 use yii\helpers\Html;
-use app\assets\AppAssetClassicTopBar;
+use app\assets\AppAssetClassicTopBarBlank;
 use yii\helpers\Url;
 
-AppAssetClassicTopBar::register($this);
+AppAssetClassicTopBarBlank::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -14,6 +14,7 @@ AppAssetClassicTopBar::register($this);
 <!-- Etiqueta head -->
 <?=$this->render("//components/head")?>
 <body class="animsition <?=isset($this->params['classBody'])?$this->params['classBody']:''?>">
+
   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -27,13 +28,7 @@ AppAssetClassicTopBar::register($this);
     </div>
   </div>  
 
-  
-
   <?php $this->endBody();?>
- 
-  <script>
-  Config.set('assets', '<?=Url::base()?>/templates/classic/topbar/assets');
-  </script>
 
   <script>
   (function(document, window, $) {

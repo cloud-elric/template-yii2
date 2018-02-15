@@ -11,11 +11,6 @@ use yii\helpers\Url;
 $this->title = 'Login';
 $this->params['classBody'] = "page-login-v3 layout-full";
 
-$this->registerCssFile(
-    '@web/webAssets/templates/classic/topbar/assets/examples/css/pages/login-v3.css',
-    ['depends' => [\app\assets\AppAssetClassicTopBar::className()]]
-);
-
 ?>
 
 <div class="panel">
@@ -43,9 +38,9 @@ $this->registerCssFile(
 		]); 
 		?>
 
-		<?= $form->field($model, 'username')->textInput(["class"=>"form-control empty"]) ?>
+		<?= $form->field($model, 'username')->textInput(["class"=>"form-control"]) ?>
 
-		<?= $form->field($model, 'password')->passwordInput(["class"=>"form-control empty"])?>
+		<?= $form->field($model, 'password')->passwordInput(["class"=>"form-control"])?>
 
 		<div class="form-group clearfix">
 			<a class="float-right" href="forgot-password.html">¿Olvidaste tu contraseña?</a>
@@ -57,6 +52,6 @@ $this->registerCssFile(
 		<?php ActiveForm::end(); ?>
 
 
-		<p class="soporteTxt">¿Necesitas ayuda? escribe a: <a href="mailto:soporte@2gom.com.mx?Subject=Solicitud%de%Soporte">soporte@2gom.com.mx</a></p>
+		<p class="soporteTxt">¿Necesitas ayuda? escribe a: <a class="no-redirect" href="mailto:soporte@2gom.com.mx?Subject=Solicitud%de%Soporte">soporte@2gom.com.mx</a></p>
 	</div>
 </div>
