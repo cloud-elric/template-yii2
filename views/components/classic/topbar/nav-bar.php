@@ -1,5 +1,8 @@
 <?php
 use yii\helpers\Url;
+use app\modules\ModUsuarios\models\EntUsuarios;
+$usuario = EntUsuarios::getUsuarioLogueado();
+
 ?>
 <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega navbar-inverse"
 role="navigation">
@@ -43,8 +46,11 @@ role="navigation">
         <li class="nav-item dropdown">
           <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
           data-animation="scale-up" role="button">
+            <span class="mr-10">
+              <?=$usuario->nombreCorto?>
+            </span>
             <span class="avatar avatar-online">
-              <img src="<?=Url::base()?>/webAssets/templates/classic/global/portraits/5.jpg" alt="...">
+              <img src="<?=Url::base()?>/profiles/<?=$usuario->txt_token."/".$usuario->txt_imagen?>" alt="...">
               <i></i>
             </span>
           </a>

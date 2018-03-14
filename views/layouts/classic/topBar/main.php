@@ -23,7 +23,8 @@ AppAsset::register($this);
 
   <?=$this->render("//components/classic/topbar/menu")?>
 
-  <?=$content?>
+  <?=$this->render("//components/classic/topbar/body", ["content"=>$content])?>
+  
 
   <?=$this->render("//components/classic/topbar/footer")?>
 

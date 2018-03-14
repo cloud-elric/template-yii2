@@ -21,14 +21,14 @@ class AppAssetClassicTopBar extends AssetBundle
       'css/site.min.css',
     ];
     public $js = [
-        'js/Section/Menubar.js',
-        'js/Section/Sidebar.js',
-        'js/Section/PageAside.js',
-        'js/Plugin/menu.js',
-        'js/config/tour.js',
+        'js/Section/Menubar.min.js',
+        'js/Section/Sidebar.min.js',
+        'js/Section/PageAside.min.js',
+        'js/Plugin/menu.min.js',
+        'js/config/tour.min.js',
         '../../global/js/ConfigInit.js',
-        '../../global/js/Plugin/bootstrap-sweetalert.js',
-        'js/Site.js',
+        '../../global/js/Plugin/bootstrap-sweetalert.min.js',
+        'js/Site.min.js',
     ];
     public $depends = [
         'app\assets\AppAssetClassicCore',

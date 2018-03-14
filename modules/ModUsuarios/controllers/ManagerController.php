@@ -65,29 +65,24 @@ class ManagerController extends Controller {
 		
 		if ($model->load ( Yii::$app->request->post () )) {
 			
-			if ($user = $model->signup ()) {
+			if ($model->signup ()) {
+
+				// Envia un correo de bienvenida al usuario
+				if(Yii::$app->params ['modUsuarios'] ['mandarCorreoBienvenida']){
+					$model->enviarEmailBienvenida();
+				}
 				
 				if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion']) {
 					
-					$activacion = new EntUsuariosActivacion ();
-					$activacion->saveUsuarioActivacion ( $user->id_usuario );
+					$model->enviarEmailActivacion();
 					
-					// Enviar correo de activación
-					$utils = new Utils ();
-					// Parametros para el email
-					$parametrosEmail ['url'] = Yii::$app->urlManager->createAbsoluteUrl ( [ 
-							'activar-cuenta/' . $activacion->txt_token 
-					] );
-					$parametrosEmail ['user'] = $user->getNombreCompleto ();
-					
-					// Envio de correo electronico
-					$utils->sendEmailActivacion ( $user->txt_email,$parametrosEmail );
 					$this->redirect ( [ 
 							'login' 
 					] );
+					
 				} else {
 					
-					if (Yii::$app->getUser ()->login ( $user )) {
+					if (Yii::$app->getUser ()->login ( $model )) {
 						return $this->goHome ();
 					}
 				}
@@ -127,6 +122,29 @@ class ManagerController extends Controller {
 		return $this->render ( 'peticionPass', [ 
 				'model' => $model 
 		] );
+	}
+
+	/**
+	 * Ingresa automaticamente al portal
+	 */
+	public function actionIngresar($t=null){
+		$usuario = EntUsuarios::find()->where(["txt_token"=>$t])->one();
+
+		if($usuario && $usuario->id_status == EntUsuarios::STATUS_BLOCKED){
+			// Mandar 
+
+			return false;
+		}
+
+		if($usuario){
+			Yii::$app->getUser ()->login ( $usuario );
+			$usuario->id_status = EntUsuarios::STATUS_ACTIVED;
+			$usuario->save();
+		}
+
+		
+
+		return $this->goHome();
 	}
 	
 	/**

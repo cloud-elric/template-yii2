@@ -65,7 +65,7 @@ class Utils {
 	/**
 	 * Envia mensaje de correo electronico
 	 *
-	 * @param string $templateHtml        	
+	 * @param string $templateHtml      	
 	 * @param string $templateText        	
 	 * @param string $from        	
 	 * @param string $to        	

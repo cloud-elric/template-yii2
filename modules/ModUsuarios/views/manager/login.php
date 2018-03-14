@@ -43,11 +43,14 @@ $this->params['classBody'] = "page-login-v3 layout-full";
 		<?= $form->field($model, 'password')->passwordInput(["class"=>"form-control"])?>
 
 		<div class="form-group clearfix">
-			<a class="float-right" href="forgot-password.html">¿Olvidaste tu contraseña?</a>
+			<a class="float-right" href="<?=Url::base()?>/peticion-pass">¿Olvidaste tu contraseña?</a>
 		</div>
 
-		<?= Html::submitButton('<span class="ladda-label">Ingresar</span>', ["data-style"=>"zoom-in", 'class' => 'btn btn-primary btn-block btn-lg mt-40 ladda-button', 'name' => 'login-button'])
+		<?= Html::submitButton('<span class="ladda-label">Ingresar</span>', ["data-style"=>"zoom-in", 'class' => 'btn btn-primary btn-block btn-lg mt-20 ladda-button', 'name' => 'login-button'])
 		?>
+		<div class="form-group clearfix text-center mt-20">
+			<a href="<?=Url::base()?>/sign-up">Necesito una cuenta</a>
+		</div>
 
 		<?php ActiveForm::end(); ?>
 
