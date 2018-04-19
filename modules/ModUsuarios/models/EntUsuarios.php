@@ -65,6 +65,8 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 					'on' => 'registerInput',
 					'message'=>'Los email deben coincidir'
 				],
+
+				
 				[
 					['txt_email', 'repeatEmail'], 'email', 
 					'on' => 'registerInput',
@@ -74,9 +76,16 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 						'repeatPassword',
 						'compare',
 						'compareAttribute' => 'password',
-						'on' => 'registerInput',
+						'on' => 'cambiarPass',
 						'message'=>'Las contraseñas deben coincidir'
 				],
+				[ 
+					'repeatPassword',
+					'compare',
+					'compareAttribute' => 'password',
+					'on' => 'registerInput',
+					'message'=>'Las contraseñas deben coincidir'
+			],
 				[ 
 						'txt_email',
 						'trim' 
@@ -608,11 +617,12 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 	}
 
 	public function enviarEmailBienvenida(){
+		
 		// Parametros para el email
 		$params ['url'] = Yii::$app->urlManager->createAbsoluteUrl ( [ 
 			'ingresar/' . $this->txt_token 
 		] );
-		$params ['user'] = $this->getNombreCompleto ();
+		$params ['user'] = $this->nombreCompleto;
 		$params ['email'] = $this->txt_email;
 		$params ['password'] = $this->password;
 		
@@ -634,13 +644,6 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
 	}
 
-	public function enviarEmailRecoveryPass($params){
-
-	}
-
-	public function enviarEmailNotificacion($params){
-
-	}
 
 	public static function getUsuarioLogueado(){
 		$usuarioLogueado = Yii::$app->user->identity;

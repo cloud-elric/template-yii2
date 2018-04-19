@@ -11,9 +11,13 @@ use yii\helpers\Url;
 $this->title = 'Login';
 $this->params['classBody'] = "page-login-v3 layout-full";
 
+// Bloque para funcionalidad de login con facebook mediante firebase
+$botonFacebook = false;
+if (FireBase::ENABLED) {
+	$botonFacebook = '<div class="btn btn-primary btn-block" onclick="login();">Login Facebook</div>';
+	echo $this->render("//components/firebase");
+}
 ?>
-
-
 
 <div class="panel">
 	<div class="panel-body">
@@ -24,7 +28,7 @@ $this->params['classBody'] = "page-login-v3 layout-full";
 
 		<?php 
 	$form = ActiveForm::begin([
-		'id' => 'form-ajax',
+		//'id' => 'form-ajax',
 		'enableAjaxValidation' => true,
 		'enableClientValidation' => true,
 		'fieldConfig' => [

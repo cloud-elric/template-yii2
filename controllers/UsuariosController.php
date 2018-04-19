@@ -4,15 +4,15 @@ namespace app\controllers;
 
 use Yii;
 use app\modules\ModUsuarios\models\EntUsuarios;
-use app\modules\ModUsuarios\models\EntUsuariosSearch;
+use app\models\EntUsuariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EntUsuariosController implements the CRUD actions for EntUsuarios model.
+ * UsuariosController implements the CRUD actions for EntUsuarios model.
  */
-class EntUsuariosController extends Controller
+class UsuariosController extends Controller
 {
     /**
      * @inheritdoc
@@ -46,8 +46,9 @@ class EntUsuariosController extends Controller
 
     /**
      * Displays a single EntUsuarios model.
-     * @param string $id
+     * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -67,18 +68,19 @@ class EntUsuariosController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_usuario]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
      * Updates an existing EntUsuarios model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -86,18 +88,19 @@ class EntUsuariosController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id_usuario]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
      * Deletes an existing EntUsuarios model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -109,7 +112,7 @@ class EntUsuariosController extends Controller
     /**
      * Finds the EntUsuarios model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
+     * @param integer $id
      * @return EntUsuarios the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -117,8 +120,8 @@ class EntUsuariosController extends Controller
     {
         if (($model = EntUsuarios::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
