@@ -15,11 +15,12 @@ $this->params['classBody'] = "page-login-v3 layout-full login-page";
 
 
 
-<div class="panel">
-	<div class="panel-body">
-		<div class="brand">
-			<img class="brand-img mb-40" src="<?= Url::base() ?>/webAssets/images/logo.png" alt="...">
-		</div>
+<div class="login">
+	<div class="login-body">
+		
+		<h2>
+            <img src="<?=Url::base()?>/webAssets/images/logo-latingal-boutique.png" alt="">
+        </h2>
 
 
 		<?php 
