@@ -56,7 +56,7 @@
 		@media screen and (max-width: $screen-sp)
 			@content
 	@else if $media == res
-		@media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx)
+		@media only screen and #{$retina}
 			@content
 
 
