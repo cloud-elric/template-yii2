@@ -4,51 +4,43 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\EntUsuariosSearch */
+/* @var $model app\models\UsuariosSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="ent-usuarios-search">
+<div class="panel-search">
+
+    <h3 class="panel-search-title">Usuarios</h3>
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'class' => 'panel-search-form'
+        ],
     ]); ?>
 
-    <?= $form->field($model, 'id_usuario') ?>
-
-    <?= $form->field($model, 'id_codigo') ?>
-
-    <?= $form->field($model, 'txt_auth_item') ?>
-
-    <?= $form->field($model, 'txt_token') ?>
-
-    <?= $form->field($model, 'txt_imagen') ?>
-
-    <?php // echo $form->field($model, 'txt_username') ?>
-
-    <?php // echo $form->field($model, 'txt_apellido_paterno') ?>
-
-    <?php // echo $form->field($model, 'txt_apellido_materno') ?>
-
-    <?php // echo $form->field($model, 'txt_auth_key') ?>
-
-    <?php // echo $form->field($model, 'txt_password_hash') ?>
-
-    <?php // echo $form->field($model, 'txt_password_reset_token') ?>
-
-    <?php // echo $form->field($model, 'txt_email') ?>
-
-    <?php // echo $form->field($model, 'fch_creacion') ?>
-
-    <?php // echo $form->field($model, 'fch_actualizacion') ?>
-
-    <?php // echo $form->field($model, 'id_status') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+    <div class="row">
+        <div class="col-md-2">
+            <?= $form->field($model, 'txt_username') ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'txt_apellido_paterno') ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'txt_email') ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'txt_email') ?>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group form-group-btns">
+                <?= Html::submitButton('Buscar', ['class' => 'btn btn-search']) ?>
+                <?= Html::resetButton('Limpiar', ['class' => 'btn btn-clear']) ?>
+            </div>
+        </div>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 

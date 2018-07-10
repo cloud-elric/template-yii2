@@ -10,6 +10,7 @@ use app\modules\ModUsuarios\models\Utils;
 use kartik\password\StrengthValidator;
 use yii\web\UploadedFile;
 use app\models\Email;
+use app\models\AuthItem;
 
 /**
  * This is the model class for table "ent_usuarios".
@@ -459,12 +460,9 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		$this->generateAuthKey ();
 		$this->fch_creacion = Utils::getFechaActual ();
 		
-		// Si esta activada la opcion de mandar correo de activación el usuario estara en status pendiente
-		if (Yii::$app->params ['modUsuarios'] ['mandarCorreoActivacion'] && !$isFacebook) {
-			$this->id_status = self::STATUS_PENDIENTED;
-		} else {
-			$this->id_status = self::STATUS_ACTIVED;
-		}
+		
+		$this->id_status = self::STATUS_ACTIVED;
+		
 
 		if($this->save()){
 
@@ -644,6 +642,11 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 
 	}
 
+	public function getRoleDescription(){
+		
+		return $this->txtAuthItem->description;
+	}
+
 
 	public static function getUsuarioLogueado(){
 		$usuarioLogueado = Yii::$app->user->identity;
@@ -651,5 +654,26 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 			$usuarioLogueado = new EntUsuarios();
 		}
 		return $usuarioLogueado;
+	}
+
+	/**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTxtAuthItem()
+    {
+        return $this->hasOne(AuthItem::className(), ['name' => 'txt_auth_item']);
+	}
+
+	public function randomPassword() {
+		$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+		$pass = array(); //remember to declare $pass as an array
+		$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+		for ($i = 0; $i < 8; $i++) {
+			$n = rand(0, $alphaLength);
+			$pass[] = $alphabet[$n];
+
+            	
+        }
+        return implode($pass);
 	}
 }

@@ -12,6 +12,14 @@ $this->params['classBody'] = "page-login-v3 layout-full";
 			<img class="brand-img mb-40" src="<?=Url::base()?>/webAssets/images/logo.png" alt="...">
 		</div>
 
+		<?php if (Yii::$app->session->hasFlash('success')): ?>
+			<div class="alert dark alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">×</span>
+				</button>
+				<?= Yii::$app->session->getFlash('success') ?>
+			</div>
+		<?php endif; ?>
 
 		<?php 
 		$form = ActiveForm::begin([
