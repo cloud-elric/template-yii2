@@ -93,14 +93,15 @@ class ManagerController extends Controller {
 		}
 
 		if(FireBase::ENABLED){
-			return $this->render ( '//firebase/sign-up', [ 
-				'model' => $model 
-			] );
+			// return $this->render ( '//firebase/sign-up', [ 
+			// 	'model' => $model 
+			// ] );
 		}else{
-			return $this->render ( 'signUp', [ 
-				'model' => $model 
-			] );
+			
 		}
+		return $this->render ( 'signUp', [ 
+			'model' => $model 
+		] );
 		
 	}
 	
