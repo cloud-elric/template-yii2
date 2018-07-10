@@ -32,6 +32,6 @@ $this->registerJsFile(
       <?= $this->render('_form', [
         'model' => $model,
       ]) ?>
-      <p class="text-center">¿Tienes una cuenta? <a href="<?=Url::base()?>/login">Ingresa</a></p>
+
   </div>
 </div>
