@@ -4,13 +4,10 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 
 $this->title = 'Recuperar contraseña';
-$this->params['classBody'] = "page-login-v3 layout-full";
+$this->params['classBody'] = "page-login-v3 layout-full login-page";
 ?>
 <div class="panel">
 	<div class="panel-body">
-		<div class="brand">
-			<img class="brand-img mb-40" src="<?=Url::base()?>/webAssets/images/logo.png" alt="...">
-		</div>
 
 		<?php if (Yii::$app->session->hasFlash('success')): ?>
 			<div class="alert dark alert-success alert-dismissible" role="alert">
@@ -53,7 +50,10 @@ $this->params['classBody'] = "page-login-v3 layout-full";
 
 		<?php ActiveForm::end(); ?>
 
+		<div class="ayuda-soporte">
+			<span>¿Necesitas ayuda? escribe a:</span>
+			<a class="no-redirect login-link" href="mailto:soporte@2gom.com.mx?Subject=Solicitud%de%Soporte">soporte@2gom.com.mx</a>
+		</div>
 
-		<p class="soporteTxt">¿Necesitas ayuda? escribe a: <a class="no-redirect" href="mailto:soporte@2gom.com.mx?Subject=Solicitud%de%Soporte">soporte@2gom.com.mx</a></p>
 	</div>
 </div>

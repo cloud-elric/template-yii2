@@ -15,8 +15,8 @@ $this->params['classBody'] = "page-login-v3 layout-full login-page";
 
 
 
-<div class="login">
-	<div class="login-body">
+<div class="panel">
+	<div class="panel-body">
 		
 		<h2>
             <img src="<?=Url::base()?>/webAssets/images/logo-latingal-boutique.png" alt="">
@@ -63,6 +63,6 @@ $this->params['classBody'] = "page-login-v3 layout-full login-page";
 		<div class="ayuda-soporte">
 			<span>¿Necesitas ayuda? escribe a:</span>
 			<a class="no-redirect login-link" href="mailto:soporte@2gom.com.mx?Subject=Solicitud%de%Soporte">soporte@2gom.com.mx</a>
-		<div>
+		</div>
 	</div>
 </div>
