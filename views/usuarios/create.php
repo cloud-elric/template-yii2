@@ -40,7 +40,7 @@ use app\models\Constantes;
 
 <div class="list-head">
 
-  <h2 class="title"><?=$this->title?></h2>
+  
 
   </div>
 

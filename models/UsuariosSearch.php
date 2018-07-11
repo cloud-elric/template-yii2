@@ -27,6 +27,8 @@ class UsuariosSearch extends EntUsuarios
         ];
     }
 
+    
+
     /**
      * @inheritdoc
      */

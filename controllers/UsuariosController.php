@@ -16,6 +16,7 @@ use yii\web\UploadedFile;
 use app\models\EntGruposTrabajo;
 use app\models\EntCitas;
 use app\models\ResponseServices;
+use kartik\form\ActiveForm;
 
 /**
  * UsuariosController implements the CRUD actions for EntUsuarios model.
@@ -118,6 +119,7 @@ class UsuariosController extends Controller
 
         $model = new EntUsuarios();
         $model->scenario='create';
+       
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;

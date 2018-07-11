@@ -23,32 +23,32 @@ $usuario = EntUsuarios::getUsuarioLogueado();
 //     'encode' => false,
 //     'template'=>'<li class="breadcrumb-item">{link}</li>', 
 //   ];
+$this->title = 'Editar usuario';
+$this->params['classBody'] = "site-navbar-small";
 
-  $this->params['classBody'] = "site-navbar-small";  
+$this->registerJsFile(
+  '@web/webAssets/js/sign-up.js',
+  ['depends' => [\yii\web\JqueryAsset::className()]]
+);
 
-  $this->registerJsFile(
-    '@web/webAssets/js/sign-up.js',
-    ['depends' => [\yii\web\JqueryAsset::className()]]
-  );
-
-  $this->registerCssFile(
-    '@web/webAssets/css/signUp.css',
-    ['depends' => [\yii\web\JqueryAsset::className()]]
-  );
+$this->registerCssFile(
+  '@web/webAssets/css/signUp.css',
+  ['depends' => [\yii\web\JqueryAsset::className()]]
+);
 ?>
 <div class="panel panel-usuarios-editar">
     <div class="panel-body">
         <?= $this->render('_form', [
-            'model' => $model,
-            'roles'=>$roles,
-            'supervisores'=>$supervisores
+          'model' => $model,
+          'roles' => $roles,
+          'supervisores' => $supervisores
         ]) ?>
     </div>
 </div>
 
 <?php
-if($model->txt_auth_item == ConstantesWeb::SUPERVISOR){
-echo $this->render("_view-usuarios-asignados", ['model'=>$model,'roles'=>$roles]);
+if ($model->txt_auth_item == ConstantesWeb::SUPERVISOR) {
+  echo $this->render("_view-usuarios-asignados", ['model' => $model, 'roles' => $roles]);
 }
 ?>
 
@@ -59,7 +59,7 @@ $this->registerJs(
   $("#entusuarios-txt_auth_item").on("change", function(){
     var val = $(this).val();
     var contenedor = $(".asignar-supervisor-contenedor");
-    if(val=="'.ConstantesWeb::CALLCENTER.'"){
+    if(val=="' . ConstantesWeb::CALLCENTER . '"){
       contenedor.removeClass(claseOcultar);
     }else{
       contenedor.addClass(claseOcultar);

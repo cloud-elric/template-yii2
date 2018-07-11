@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
 
 $this->title = 'Usuarios';
 $this->params['breadcrumbs'][] = [
-  'label' => '<i class="icon pe-users"></i>'.$this->title, 
+ 'label' => '<i class="icon pe-users"></i>'.$this->title, 
   'encode' => false,
   'template'=>'<li class="breadcrumb-item">{link}</li>', 
 ];
@@ -38,7 +38,7 @@ $this->registerJsFile(
 
 <div class="list-head">
 
-  <h2 class="title"><?=$this->title?></h2>
+
 
   <div class="list-actions">
     <?= Html::a('<span><i class="icon wb-plus" aria-hidden="true"></i>Crear</span>', ['create'], ['class' => 'btn btn-animate btn-animate-vertical btn-primary']) ?>
