@@ -23,10 +23,23 @@ AppAsset::register($this);
 
   <?=$this->render("//components/classic/topbar/menu")?>
 
+  <div id="pleca-cookies" class="pleca-cookies">
+    <div class="container-1220">
+        <div class="pc-col-textos">
+            <p>Utilizamos cookies para personalizar tu experiencia en nuestros sitios web. Al utilizar nuestro sitio, aceptas el uso de cookies tal como se describe en nuestra <a href="<?=Url::base()?>/site/aviso-privacidad">Política de Privacidad</a></p>
+        </div>
+        <div class="pc-col-button">
+            <button class="btn btn-primary js-btn-cookies">OK</button>
+        </div>
+    </div>
+    <span class="pc-close js-pc-close"><i class="ion ion-ios-close-empty"></i></span>
+  </div>
+
   <?=$this->render("//components/classic/topbar/body", ["content"=>$content])?>
   
-
   <?=$this->render("//components/classic/topbar/footer")?>
+
+  <?= $this->render("//components/unsoported")?>
 
   <?php $this->endBody();?>
  

@@ -366,7 +366,7 @@
 		},
 	"\/images\/bkgd.jpg": {
 		"ft": 16384,
-		"iS": 196114,
+		"iS": 48127,
 		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/Fondos-para-tumblr-oscuros-creativo-fondos-de-pantalla-color-azul-oscuro-patr-n-texturas-pared-196114.jpg",
@@ -381,6 +381,28 @@
 		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/bkgdBK.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"\/images\/img-chrome.png": {
+		"ft": 32768,
+		"iS": 2684,
+		"oA": 0,
+		"oAP": "\/images\/img-chrome.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"\/images\/img-unsuported.jpg": {
+		"ft": 16384,
+		"iS": 13921,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "\/images\/img-unsuported.jpg",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
@@ -435,6 +457,16 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/geeks-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/js\/index.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/index-min.js",
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
@@ -553,6 +585,13 @@
 		"oAP": "\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_components.sassc",
 		"oF": 0
 		},
+	"\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_cookies.sassc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_cookies.sassc",
+		"oF": 0
+		},
 	"\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_fonts.sassc": {
 		"cB": 0,
 		"ft": 8192,
@@ -609,6 +648,13 @@
 		"oAP": "\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_mixins.sassc",
 		"oF": 0
 		},
+	"\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_unsoported.sassc": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 1,
+		"oAP": "\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_unsoported.sassc",
+		"oF": 0
+		},
 	"\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/_usuarios.sassc": {
 		"cB": 0,
 		"ft": 8192,
@@ -630,19 +676,6 @@
 		"oAP": "\/sass\/.sass-cache\/d665114bccf2ab62a42afa8a788688d35b723337\/site-extend.sassc",
 		"oF": 0
 		},
-	"\/sass\/_base.sass": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 2,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/sass\/_base.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/sass\/_basic.sass": {
 		"aP": 0,
 		"bl": 0,
@@ -656,19 +689,6 @@
 		"oS": 0,
 		"uL": 1
 		},
-	"\/sass\/_basicBK.sass": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 2,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/sass\/_basicBK.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
 	"\/sass\/_components.sass": {
 		"aP": 0,
 		"bl": 0,
@@ -678,6 +698,19 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/sass\/_components.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"\/sass\/_cookies.sass": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 2,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/sass\/_cookies.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -704,58 +737,6 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/sass\/_footer.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/sass\/_ionicons-font.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/sass\/_ionicons-font.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/sass\/_ionicons-icons.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/sass\/_ionicons-icons.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/sass\/_ionicons-variables.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/sass\/_ionicons-variables.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/sass\/_ionicons.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/sass\/_ionicons.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
@@ -825,6 +806,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"\/sass\/_unsoported.sass": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 2,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "\/sass\/_unsoported.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"\/sass\/_usuarios.sass": {
 		"aP": 0,
 		"bl": 0,
@@ -847,19 +841,6 @@
 		"ma": 0,
 		"oA": 1,
 		"oAP": "\/sass\/_variables.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"\/sass\/_variablesBK.sass": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 2,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "\/sass\/_variablesBK.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
