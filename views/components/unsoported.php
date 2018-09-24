@@ -7,7 +7,7 @@ use yii\helpers\Url;
     <div class="latin-message-cont l-un">
         <div class="l-un-textos">
             
-            <img src="<?=Url::base()?>/webAssets/images/img-unsuported.jpg" alt="" class="l-un-textos-img">
+            <img src="<?=Url::base()?>/webAssets/images/img-unsuported.png" alt="" class="l-un-textos-img">
 
             <h2 class="l-un-textos-title">
                 Sorry, but this web browser isn't supported yet.
@@ -28,7 +28,7 @@ use yii\helpers\Url;
 
         </div>
         <div class="l-un-footer">
-            <p>&copy; 2018 LatinGal Boutique.</p>
+            <p>&copy; 2018 Proyecto.</p>
         </div>
     </div>
 </div>

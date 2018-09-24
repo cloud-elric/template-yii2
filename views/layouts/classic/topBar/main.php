@@ -23,6 +23,10 @@ AppAsset::register($this);
 
   <?=$this->render("//components/classic/topbar/menu")?>
 
+  <?=$this->render("//components/classic/topbar/body", ["content"=>$content])?>
+  
+  <?=$this->render("//components/classic/topbar/footer")?>
+
   <div id="pleca-cookies" class="pleca-cookies">
     <div class="container-1220">
         <div class="pc-col-textos">
@@ -34,10 +38,6 @@ AppAsset::register($this);
     </div>
     <span class="pc-close js-pc-close"><i class="ion ion-ios-close-empty"></i></span>
   </div>
-
-  <?=$this->render("//components/classic/topbar/body", ["content"=>$content])?>
-  
-  <?=$this->render("//components/classic/topbar/footer")?>
 
   <?= $this->render("//components/unsoported")?>
 

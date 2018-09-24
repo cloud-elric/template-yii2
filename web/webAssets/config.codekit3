@@ -366,7 +366,7 @@
 		},
 	"\/images\/bkgd.jpg": {
 		"ft": 16384,
-		"iS": 48127,
+		"iS": 196114,
 		"jF": 0,
 		"oA": 0,
 		"oAP": "\/images\/Fondos-para-tumblr-oscuros-creativo-fondos-de-pantalla-color-azul-oscuro-patr-n-texturas-pared-196114.jpg",
@@ -386,9 +386,20 @@
 		"opt": 0,
 		"q": 100
 		},
+	"\/images\/browser.png": {
+		"ft": 32768,
+		"iS": 9134,
+		"oA": 0,
+		"oAP": "\/images\/browser.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"\/images\/img-chrome.png": {
 		"ft": 32768,
-		"iS": 2684,
+		"iS": 6928,
 		"oA": 0,
 		"oAP": "\/images\/img-chrome.png",
 		"oF": 0,
@@ -457,6 +468,16 @@
 		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/geeks-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"\/js\/index-min.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "\/js\/index-min-min.js",
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
