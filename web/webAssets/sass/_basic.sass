@@ -494,3 +494,332 @@ a
 		img
 			max-width: 90%
 			width: 80px
+	
+.tooltip.bs-tether-element-attached-bottom,
+.tooltip.tooltip-top
+	.tooltip-inner
+		background-color: darken( $primary, 10% )
+		&::before
+			border-top-color: darken( $primary, 10% )
+
+
+.tooltip.tooltip-2.tooltip-primary
+	display: block !important
+	.arrow
+		background-color: darken( $primary, 10% )
+		
+	.tooltip-inner
+		background-color: darken( $primary, 10% )
+		&:before
+			border-top-color: darken( $primary, 10% )
+
+.tooltip.tooltip-2.tooltip-success
+	display: block !important
+	.arrow
+		background-color: darken( $success, 10% )
+		
+	.tooltip-inner
+		background-color: darken( $success, 10% )
+		&:before
+			border-top-color: darken( $success, 10% )
+
+.tooltip.tooltip-2.tooltip-danger
+	display: block !important
+	.arrow
+		background-color: darken( $error, 10% )
+		
+	.tooltip-inner
+		background-color: darken( $error, 10% )
+		&:before
+			border-top-color: darken( $error, 10% )
+
+.tooltip.tooltip-2.tooltip-info
+	display: block !important
+	.arrow
+		background-color: darken( $info, 10% )
+		
+	.tooltip-inner
+		background-color: darken( $info, 10% )
+		&:before
+			border-top-color: darken( $info, 10% )
+
+.tooltip.tooltip-2.tooltip-warning
+	display: block !important
+	.arrow
+		background-color: darken( $warning, 10% )
+		
+	.tooltip-inner
+		background-color: darken( $warning, 10% )
+		&:before
+			border-top-color: darken( $warning, 10% )
+
+// PROGRESS
+.progress
+	.progress-bar
+		background-color: $secondary
+
+// CALENDARIO
+.fc
+	.fc-button-group
+		.fc-prev-button.fc-button,
+		.fc-next-button.fc-button
+			@extend .bg-e
+			border-radius: 0
+			padding: 0
+			span.fc-icon
+				// background-color: red
+				height: 32px
+				line-height: 32px
+				top: 0
+				width: 32px
+				&::after
+					font-family: 'Web Icons'
+					font-size: 24px
+					font-weight: normal
+					text-shadow: none
+					text-rendering: auto
+					top: 0
+					-moz-osx-font-smoothing: grayscale
+			&:hover,
+			&:focus
+				background-color: $primary
+				color: $white
+
+		.fc-prev-button.fc-button
+			border-top-left-radius: 4px
+			border-bottom-left-radius: 4px
+			span.fc-icon
+				&::after
+					content: ''
+		
+		.fc-next-button.fc-button
+			border-top-right-radius: 4px
+			border-bottom-right-radius: 4px
+			span.fc-icon
+				&::after
+					content: ''
+
+	.fc-toolbar
+		h2
+			color: $primary
+			font-size: $fs-40 !important
+			font-weight: $light !important
+
+.fc-unthemed
+	.fc-today
+		background-color: rgba($primary, .12) !important
+
+.fc-row.fc-widget-header
+	table
+		thead
+			tr
+				th.fc-day-header
+					span
+						// background-color: green
+						@extend .fw-regular
+
+.fc
+	td.fc-widget-header
+		background-color: $secondary
+		padding-bottom: 0 !important
+		padding-top: 0 !important
+		.fc-row
+			table
+				thead
+					tr
+						th
+							span
+								color: $white
+								font-family: $f-base
+								font-size: $fs-20 !important
+								font-weight: $light !important
+
+.fc-time-grid-container
+	// background-color: red
+	.fc-time-grid
+		.fc-slats
+			table
+				tbody
+					// background-color: green
+					tr
+						td.fc-axis
+							padding: 4px 4px
+							span
+								color: $primary
+								@extend .fw-regular
+
+.fc-unthemed
+	.fc-day-header.fc-widget-header,
+	.fc-today
+		padding: 16px 4px !important
+
+.fc-event
+	.fc-bg
+		background: transparent
+		background-color: transparent
+		opacity: .025 !important
+
+.fc-time-grid-event.fc-v-event.fc-event
+	border-color: transparent
+
+
+
+// Datepicker
+.datepicker.datepicker-dropdown.dropdown-menu,
+.datepicker.datepicker-dropdown.dropdown-menu,.datepicker-orient-left.datepicker-orient-top
+	z-index: 1951 !important
+
+.clockpicker-popover,
+.popover.clockpicker-popover
+	z-index: 1952 !important
+	.popover-title
+		.text-primary
+			color: $primary !important
+
+	.popover-content
+		// .clockpicker-tick
+		// 	background-color: rgba($primary,.2) !important
+		.clockpicker-tick.active
+			background-color: rgba($secondary,.7) !important
+			color: $white !important
+		.clockpicker-tick:hover
+			background-color: rgba($primary,.3) !important
+
+		.clockpicker-canvas
+			line
+				stroke: $primary !important
+
+		.clockpicker-canvas-bearing,
+		.clockpicker-canvas-fg
+			fill: $primary !important
+
+.datepicker table tr td.active:active, .datepicker table tr td.active.highlighted:active, .datepicker table tr td.active.active, .datepicker table tr td.active.highlighted.active
+	background-color: $secondary !important
+	border-color: $secondary !important
+
+.datepicker table tr td span.active:active, .datepicker table tr td span.active:hover:active, .datepicker table tr td span.active.disabled:active, .datepicker table tr td span.active.disabled:hover:active, .datepicker table tr td span.active.active, .datepicker table tr td span.active:hover.active, .datepicker table tr td span.active.disabled.active, .datepicker table tr td span.active.disabled:hover.active
+	background-color: $secondary !important
+	border-color: $secondary !important
+
+.datepicker table tr td.old, .datepicker table tr td.new
+	background-color: $grey-e
+	border-radius: 0
+
+// Calendario scroll
+.fc-time-grid-container,
+.fc-time-grid
+	height: auto !important
+	overflow: auto !important
+
+
+// ------- SELECT 2
+// Select 2 Global
+.select2.select2-container
+	&:active,
+	&:hover,
+	&:focus
+		outline: none
+
+// select normal
+.select2-container--krajee
+	.select2-selection
+		border-color: $grey-e !important
+		box-shadow: none !important
+		
+// select focus
+.select2-container--krajee.select2-container--open
+	.select2-selection,
+	.select2-selection:focus
+		border-color: $grey-a !important
+		box-shadow: none !important
+
+// select arrow
+.select2-container--krajee
+	.select2-selection--single
+		.select2-selection__arrow
+			border-left-color: $grey-e !important
+
+// select dropdown - border
+.select2-container--krajee
+	.select2-dropdown
+		border-color: $grey-a !important
+
+// select dropdiwn - container
+.select2-dropdown
+	background-color: $grey-e !important
+	border-color: purple !important
+
+// select dropdiwn - container input
+.select2-container--krajee
+	.select2-search--dropdown
+		.select2-search__field
+			background-color: $white !important
+			background-position: right 10px top 10px
+			@extend .fs-16
+			@extend .fw-regular
+			padding: 4px 8px
+
+// select dropdown - container results
+.select2-container--krajee
+	.select2-results__option[aria-selected]
+		background-color: $white !important
+		color: $font-color !important
+		@extend .fs-16
+		@extend .fw-light
+		margin-left: 0 !important
+
+	.select2-results__option
+		b
+			margin-left: 0 !important	
+
+// select dropdown - container results - hover
+.select2-container--krajee
+	.select2-results__option--highlighted[aria-selected]
+		background-color: $secondary !important
+		color: $white !important
+
+// select dropdown - footer
+.select2-container--krajee
+	li.select2-results__option
+		background-color: $grey-a !important
+		color: $white !important
+
+
+// .select2-container--krajee
+// 	.select2-selection__clear
+// 		right: 26px
+// 		top: 0.1rem
+
+.select2-container--krajee
+	.select2-selection--single
+		.select2-selection__clear
+			right: 26px !important
+			top: 0.1rem !important
+
+.select2-container--krajee
+	.select2-selection--single
+		padding: 6px 40px 6px 6px !important
+
+// CHECKBOX & RADIOBUTTON
+.checkbox-custom label::before
+	background-color: $grey-b
+	border-color: $grey-b
+
+.checkbox-primary input[type="radio"]:checked + input[type="hidden"] + label::before,
+.checkbox-primary input[type="radio"]:checked + label::before,
+.checkbox-primary input[type="checkbox"]:checked + input[type="hidden"] + label::before,
+.checkbox-primary input[type="checkbox"]:checked + label::before
+	background-color: $secondary
+	border-color: $secondary
+
+
+// 
+// BODY
+.body-obracciones
+	// .page
+	// 	background-image: url(../images/lines.jpg)
+	// 	background-position: 0
+	// 	background-repeat: repeat
+	// 	background-size: 200px
+	.page
+		background-color: $grey-f5

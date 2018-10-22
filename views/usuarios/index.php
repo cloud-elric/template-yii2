@@ -36,136 +36,132 @@ $this->registerJsFile(
 
 ?>
 
-<div class="list-head">
+<div class="page-int">
 
-
-
-  <div class="list-actions">
-    <?= Html::a('<span><i class="icon wb-plus" aria-hidden="true"></i>Crear</span>', ['create'], ['class' => 'btn btn-animate btn-animate-vertical btn-primary']) ?>
+  <div class="page-int-actions">
+    <h2><?=$this->title?></h2>
+    <div class="page-int-actions-links">
+      <?= Html::a('<span><i class="icon wb-plus" aria-hidden="true"></i>Crear</span>', ['create'], ['class' => 'btn btn-animate btn-animate-vertical btn-primary']) ?>
+    </div>
   </div>
 
-</div>
-
-<div class="citas-listado">
-
-    <div class="list-panel">
+  <div class="page-int-body">
     
-      <?php
-      echo GridView::widget([
-          'dataProvider' => $dataProvider,
-          'filterModel'=>$searchModel,
-          'tableOptions' => [
-              'class'=>"table table-hover"
+    <?php
+    echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel'=>$searchModel,
+        'tableOptions' => [
+          'class'=>"table table-hover"
+        ],
+        'layout' => '{items}{summary}{pager}',
+        'responsive'=>true,
+        'striped'=>false,
+        'hover'=>false,
+        'bordered'=>false,
+        'pjax'=>true,
+        'pjaxSettings'=>[
+          'options'=>[
+            'linkSelector'=>"a:not(.no-pjax)"
+          ]
+        ],
+        'layout' => '{items}{summary}{pager}',
+        'columns' =>[
+          [
+            'filterInputOptions' => [
+              'autocomplete' => 'nofill', 
+              'class'=>"form-control"
+            ],
+            'attribute' => 'nombreCompleto',
+            'contentOptions' => [
+              'class'=>"td-capitalize"
+            ],
+            'format'=>'raw',
+            'contentOptions' => [
+              'class'=>"flex"
+            ],
+            'value'=>function($data){
+                
+            // return '<a class="no-pjax" href="'.Url::base().'/usuarios/update/'.$data->id_usuario.'"><img class="panel-listado-img" src="'.$data->imageProfile.'" alt="">
+            return  '<span>'.$data->nombreCompleto .'</span>';
+            }
           ],
-          'layout' => '{items}{summary}{pager}',
+          [
+            'attribute' => 'roleDescription',
+            'filter'=>ArrayHelper::map($roles, 'name', 'description'),
+          ],
+          'txt_email',
+          'password',
+          [
+            'contentOptions' => [
+              'class'=>"td-status"
+            ],
+            'attribute' => 'id_status',
+            'filter'=>[EntUsuarios::STATUS_ACTIVED=>'Activo', EntUsuarios::STATUS_BLOCKED=>'Inactivo'],
+            'format'=>'raw',
+            
+            'value'=>function($data){
+
+            $activo = $data->id_status == 2?'active':'';
+            $inactivo = $data->id_status == 1||$data->id_status == 3?'active':'';
+                
+              return '<div class="btn-groups" data-toggle="buttons" role="group">
+              <label class="btn btn-active '.$activo.'">
+              <input class="js-activar-usuario" type="radio" name="options" autocomplete="off" value="activar"   data-token="'.$data->txt_token.'" data-url="'.Url::base().'" />
+              Activo
+              </label>
+              <label class="btn btn-inactive '.$inactivo.'">
+              <input class="js-bloquear-usuario"  type="radio" name="options" autocomplete="off" value="bloquear"  data-token="'.$data->txt_token.'" data-url="'.Url::base().'"/>
+              Inactivo
+              </label>
+              </div>';
+            }
+          ],
+          [
+            'attribute' => 'Editar',
+            'contentOptions' => [
+              'class'=>"td-actions td-actions-i1"
+            ],
+            'format'=>'raw',
+          
+            'value'=>function($data){
+              // return '<a href="'.Url::base().'/usuarios/update/'.$data->id_usuario.'" class="btn btn-outline btn-success btn-sm no-pjax"><i class="icon wb-edit"></i></a>';     
+              $a = Html::a("<i class='icon wb-pencil' aria-hidden='true'></i>", 
+              ["usuarios/update", 'id'=>$data->id_usuario], 
+              [
+                  "class"=>"btn btn-primary btn-aprobar no-pjax js-confirmar-cita"
+              ]);
+
+              $contenedor = '<div class="td-actions-tooltip" data-toggle="tooltip" data-original-title="Editar" data-template="<div class=\'tooltip tooltip-2 tooltip-success\' role=\'tooltip\'><div class=\'arrow\'></div><div class=\'tooltip-inner\'></div></div>">
+                '.$a.' 
+              </div>';
+
+              return $contenedor;
+          
+
+            }
+          ]
+        ],
+        'panelTemplate' => "{panelHeading}\n{items}\n{summary}\n{pager}",
           'responsive'=>true,
           'striped'=>false,
           'hover'=>false,
           'bordered'=>false,
-          'pjax'=>true,
-          'pjaxSettings'=>[
-            'options'=>[
-              'linkSelector'=>"a:not(.no-pjax)"
-            ]
-          ],
-          'layout' => '{items}{summary}{pager}',
-          'columns' =>[
-            [
-              'filterInputOptions' => [
-                'autocomplete' => 'nofill', 
-                'class'=>"form-control"
+          'pager'=>[
+              'linkOptions' => [
+                  'class' => 'page-link'
               ],
-              'attribute' => 'nombreCompleto',
-              'contentOptions' => [
-                'class'=>"td-capitalize"
-              ],
-              'format'=>'raw',
-              'contentOptions' => [
-                'class'=>"flex"
-              ],
-              'value'=>function($data){
-                  
-              // return '<a class="no-pjax" href="'.Url::base().'/usuarios/update/'.$data->id_usuario.'"><img class="panel-listado-img" src="'.$data->imageProfile.'" alt="">
-              return  '<span>'.$data->nombreCompleto .'</span>';
-              }
-            ],
-            [
-              'attribute' => 'roleDescription',
-              'filter'=>ArrayHelper::map($roles, 'name', 'description'),
-            ],
-            'txt_email',
-            'password',
-            [
-              'contentOptions' => [
-                'class'=>"td-status"
-              ],
-              'attribute' => 'id_status',
-              'filter'=>[EntUsuarios::STATUS_ACTIVED=>'Activo', EntUsuarios::STATUS_BLOCKED=>'Inactivo'],
-              'format'=>'raw',
-              
-              'value'=>function($data){
-
-              $activo = $data->id_status == 2?'active':'';
-              $inactivo = $data->id_status == 1||$data->id_status == 3?'active':'';
-                  
-                return '<div class="btn-groups" data-toggle="buttons" role="group">
-                <label class="btn btn-active '.$activo.'">
-                <input class="js-activar-usuario" type="radio" name="options" autocomplete="off" value="activar"   data-token="'.$data->txt_token.'" data-url="'.Url::base().'" />
-                Activo
-                </label>
-                <label class="btn btn-inactive '.$inactivo.'">
-                <input class="js-bloquear-usuario"  type="radio" name="options" autocomplete="off" value="bloquear"  data-token="'.$data->txt_token.'" data-url="'.Url::base().'"/>
-                Inactivo
-                </label>
-                </div>';
-              }
-            ],
-            [
-              'attribute' => 'Editar',
-              'contentOptions' => [
-                'class'=>"td-actions td-actions-i1"
-              ],
-              'format'=>'raw',
-            
-              'value'=>function($data){
-                // return '<a href="'.Url::base().'/usuarios/update/'.$data->id_usuario.'" class="btn btn-outline btn-success btn-sm no-pjax"><i class="icon wb-edit"></i></a>';     
-                $a = Html::a("<i class='icon wb-pencil' aria-hidden='true'></i>", 
-                ["usuarios/update", 'id'=>$data->id_usuario], 
-                [
-                    "class"=>"btn btn-primary btn-aprobar no-pjax js-confirmar-cita"
-                ]);
-
-                $contenedor = '<div class="td-actions-tooltip" data-toggle="tooltip" data-original-title="Editar" data-template="<div class=\'tooltip tooltip-2 tooltip-success\' role=\'tooltip\'><div class=\'arrow\'></div><div class=\'tooltip-inner\'></div></div>">
-                  '.$a.' 
-                </div>';
-
-                return $contenedor;
-           
-
-              }
-            ]
-          ],
-          'panelTemplate' => "{panelHeading}\n{items}\n{summary}\n{pager}",
-            'responsive'=>true,
-            'striped'=>false,
-            'hover'=>false,
-            'bordered'=>false,
-            'pager'=>[
-                'linkOptions' => [
-                    'class' => 'page-link'
-                ],
-                'pageCssClass'=>'page-item',
-                'prevPageCssClass' => 'page-item',
-                'nextPageCssClass' => 'page-item',
-                'firstPageCssClass' => 'page-item',
-                'lastPageCssClass' => 'page-item',
-                'maxButtonCount' => '5',
-           ]
-        
-      ]);?>
-
-    </div>
-
+              'pageCssClass'=>'page-item',
+              'prevPageCssClass' => 'page-item',
+              'nextPageCssClass' => 'page-item',
+              'firstPageCssClass' => 'page-item',
+              'lastPageCssClass' => 'page-item',
+              'maxButtonCount' => '5',
+          ]
+      
+    ]);?>
+  
+  </div>
 </div>
       
     
