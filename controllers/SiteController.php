@@ -138,4 +138,9 @@ class SiteController extends Controller
         exit;
         return $fulllist;
     }
+
+    public function actionGenerarPass($p){
+        echo Yii::$app->security->generatePasswordHash($p);
+        exit;
+    }
 }
