@@ -12,7 +12,7 @@ use yii\helpers\Url;
           <li class="dropdown site-menu-item has-sub">
             <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
               <i class="site-menu-icon wb-stats-bars" aria-hidden="true"></i>
-              <span class="site-menu-title">Reportes</span>
+              <span class="site-menu-title">Menu</span>
               <span class="site-menu-arrow"></span>
             </a>
             <div class="dropdown-menu">
@@ -21,8 +21,8 @@ use yii\helpers\Url;
                   <div>
                     <ul class="site-menu-sub site-menu-normal-list">
                       <li class="site-menu-item">
-                        <a class="animsition-link" href="<?=Url::base()?>">
-                          <span class="site-menu-title">Niveles</span>
+                        <a class="animsition-link" href="<?=Url::base()?>/usuarios/index">
+                          <span class="site-menu-title">Usuarios</span>
                         </a>
                       </li>
                       <li class="site-menu-item">

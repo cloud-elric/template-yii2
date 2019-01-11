@@ -757,4 +757,9 @@ class EntUsuarios extends \yii\db\ActiveRecord implements IdentityInterface
 		}
 		return implode($pass);
 	}
+	public static function getUsuario($token)
+    {
+        $usuario = self::find()->where(['txt_token'=> $token])->one();
+        return $usuario;
+    }
 }

@@ -7,6 +7,7 @@ use Yii;
 /**
  * This is the model class for table "mod_usuarios_ent_usuarios".
  *
+ * 
  * @property int $id_usuario
  * @property int $id_codigo
  * @property string $txt_auth_item
@@ -32,6 +33,10 @@ class EntUsuarios extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    const STATUS_PENDIENTED = 1;
+	const STATUS_ACTIVED = 2;
+	const STATUS_BLOCKED = 3;
+	const USUARIO_REGISTRADO = "usuario-normal";
     public static function tableName()
     {
         return 'mod_usuarios_ent_usuarios';
@@ -113,5 +118,20 @@ class EntUsuarios extends \yii\db\ActiveRecord
     public function getTxtAuthItem()
     {
         return $this->hasOne(AuthItem::className(), ['name' => 'txt_auth_item']);
+    }
+    public function afterSave($insert, $changedAttributes)
+    {
+        $mensaje = 'Datos actualizados correctamente';
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+           $mensaje='Usuario guaradado';
+        }
+         Yii::$app->session->setFlash('success','Usuario creado con exito');
+    }
+
+    public static function getUsuario($token)
+    {
+        $usuario = self::find()->where(['txt_token'=> $token])->one();
+        return $usuario;
     }
 }

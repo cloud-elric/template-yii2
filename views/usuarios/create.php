@@ -36,6 +36,14 @@ use app\models\Constantes;
     '@web/webAssets/css/signUp.css',
     ['depends' => [\yii\web\JqueryAsset::className()]]
   );
+
+  if(Yii::$app->session->hasFlash('error')){
+    $this->registerJs ( "
+		$(document).ready(function(){
+            toastr.warning('Error al crear el servidor. Intentalo de nuevo.');
+		});
+    ", View::POS_END );
+}
 ?>
 
 <div class="list-head">

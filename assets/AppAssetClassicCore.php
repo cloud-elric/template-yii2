@@ -29,6 +29,8 @@ class AppAssetClassicCore extends AssetBundle
         "vendor/slidepanel/slidePanel.min.css",
         'vendor/bootstrap-sweetalert/sweetalert.min.css',
         "vendor/flag-icon-css/flag-icon.min.css",
+        "vendor/toastr/toastr.css",
+        "../topbar/assets/examples/css/advanced/toastr.css",
         // Fonts
         "fonts/web-icons/web-icons.min.css",
         "fonts/brand-icons/brand-icons.min.css",
@@ -53,6 +55,8 @@ class AppAssetClassicCore extends AssetBundle
         'vendor/slidepanel/jquery-slidePanel.min.js',
         'vendor/jquery-placeholder/jquery.placeholder.min.js',
         'vendor/bootstrap-sweetalert/sweetalert.min.js',
+        'vendor/toastr/toastr.js',
+        'js/Plugin/toastr.js',
         'js/State.min.js',
         'js/Component.min.js',
         'js/Plugin.min.js',

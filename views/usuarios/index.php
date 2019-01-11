@@ -13,6 +13,9 @@ use kartik\date\DatePicker;
 use app\models\AuthItem;
 use yii\helpers\ArrayHelper;
 
+use yii\web\View;
+
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsuariosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -24,15 +27,31 @@ $this->params['breadcrumbs'][] = [
   'template'=>'<li class="breadcrumb-item">{link}</li>', 
 ];
 
+
+
 $this->params['headerActions'] = '<a class="btn btn-success no-pjax" href="'.Url::base().'/usuarios/create"><i class="icon wb-plus"></i> Agregar usuario</a>';
 
 $this->params['classBody'] = "site-navbar-small page-user";
 
+
 $this->registerJsFile(
-  '@web/webAssets/js/usuarios/index.js',
+  '@web/webAssets/js/usuarios/activo.js',
   ['depends' => [\app\assets\AppAsset::className()]]
 );
 
+
+
+if(Yii::$app->session->hasFlash('success')){
+ // $this->registerJs ( "
+  // $(document).ready(function(){
+  //         toastr.success('Se creo el funcionario exitosamente.');
+  // });
+  // "
+  EntUsuarios::afterSave;
+  //,
+   View::POS_END; 
+//);
+}
 
 ?>
 
@@ -71,18 +90,18 @@ $this->registerJsFile(
           'layout' => '{items}{summary}{pager}',
           'columns' =>[
             [
-              'filterInputOptions' => [
-                'autocomplete' => 'nofill', 
-                'class'=>"form-control"
-              ],
+              // 'filterInputOptions' => [
+              //   'autocomplete' => 'nofill', 
+              //   'class'=>"form-control"
+              // ],
               'attribute' => 'nombreCompleto',
-              'contentOptions' => [
-                'class'=>"td-capitalize"
-              ],
+              // 'contentOptions' => [
+              //   'class'=>"td-capitalize"
+              // ],
               'format'=>'raw',
-              'contentOptions' => [
-                'class'=>"flex"
-              ],
+              // 'contentOptions' => [
+              //   'class'=>"flex"
+              // ],
               'value'=>function($data){
                   
               // return '<a class="no-pjax" href="'.Url::base().'/usuarios/update/'.$data->id_usuario.'"><img class="panel-listado-img" src="'.$data->imageProfile.'" alt="">
@@ -94,7 +113,7 @@ $this->registerJsFile(
               'filter'=>ArrayHelper::map($roles, 'name', 'description'),
             ],
             'txt_email',
-            'password',
+            
             [
               'contentOptions' => [
                 'class'=>"td-status"
@@ -106,15 +125,15 @@ $this->registerJsFile(
               'value'=>function($data){
 
               $activo = $data->id_status == 2?'active':'';
-              $inactivo = $data->id_status == 1||$data->id_status == 3?'active':'';
+              $inactivo = $data->id_status == 3?'active':'';
                   
                 return '<div class="btn-groups" data-toggle="buttons" role="group">
                 <label class="btn btn-active '.$activo.'">
-                <input class="js-activar-usuario" type="radio" name="options" autocomplete="off" value="activar"   data-token="'.$data->txt_token.'" data-url="'.Url::base().'" />
+                <input class="js-activar" type="radio" name="options" autocomplete="off" value="activar"   data-token="'.$data->txt_token.'" data-url="'.Url::base().'" />
                 Activo
                 </label>
                 <label class="btn btn-inactive '.$inactivo.'">
-                <input class="js-bloquear-usuario"  type="radio" name="options" autocomplete="off" value="bloquear"  data-token="'.$data->txt_token.'" data-url="'.Url::base().'"/>
+                <input class="js-bloquear"  type="radio" name="options" autocomplete="off" value="bloquear" data-token="'.$data->txt_token.'" data-url="'.Url::base().'"  />
                 Inactivo
                 </label>
                 </div>';

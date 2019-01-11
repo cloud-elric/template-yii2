@@ -18,6 +18,7 @@ use app\models\EntCitas;
 use app\models\ResponseServices;
 use kartik\form\ActiveForm;
 
+
 /**
  * UsuariosController implements the CRUD actions for EntUsuarios model.
  */
@@ -113,7 +114,7 @@ class UsuariosController extends Controller
 
         $hijos = $auth->getChildRoles($usuario->txt_auth_item);
         ksort($hijos);
-        $roles = AuthItem::find()->where(['in', 'name', array_keys($hijos)])->orderBy("description")->all();
+        $roles = AuthItem::getRoles($hijos);
 
         $supervisores = EntUsuarios::find()->where(['txt_auth_item'=>ConstantesWeb::SUPER_ADMIN])->orderBy("txt_username, txt_apellido_paterno")->all();
 
@@ -131,13 +132,17 @@ class UsuariosController extends Controller
            
             $model->repeatPassword = $model->password;
             $model->txt_auth_item = $_POST['EntUsuarios']['txt_auth_item'];
-
+            //$user = EntUsuarios::afterSave();
+            // Yii::$app->session->setFlash('success','Usuario creado con exito');
             if ($user = $model->signup()) {
 
                 return $this->redirect(['index']);
+            } else{
+                Yii::$app->session->setFlash('error', "Error al crear el usuario.");
             }
         // return $this->redirect(['view', 'id' => $model->id_usuario]);
         }
+       
 
         if(!$model->password){
             $model->password = $model->randomPassword();
@@ -246,10 +251,12 @@ class UsuariosController extends Controller
         }
     }
 
-    public function actionBloquearUsuario($token=null){
+    public function actionBloquearUsuario($token){
         $respuesta = new ResponseServices();
 
-        $usuario = $this->findModel(['txt_token'=>$token]);
+        //$usuario = $this->findModel(['txt_token'=>$token]);
+        $usuario = EntUsuarios::getUsuario($token);
+
 
         $usuario->id_status = EntUsuarios::STATUS_BLOCKED;
         if($usuario->save()){
@@ -263,11 +270,11 @@ class UsuariosController extends Controller
         return $respuesta;
     }
 
-    public function actionActivarUsuario($token=null){
+    public function actionActivarUsuario($token){
         $respuesta = new ResponseServices();
 
-        $usuario = $this->findModel(['txt_token'=>$token]);
-
+        //$usuario = $this->findModel(['txt_token'=>$token]);
+        $usuario = EntUsuarios::getUsuario($token);
         if($usuario){
             $usuario->id_status = EntUsuarios::STATUS_ACTIVED;
             if($usuario->save()){

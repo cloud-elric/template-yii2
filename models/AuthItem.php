@@ -128,4 +128,9 @@ class AuthItem extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ModUsuariosEntUsuarios::className(), ['txt_auth_item' => 'name']);
     }
+    public static function getRoles($hijos)
+    {
+        $roles = self::find()->where(['in', 'name', array_keys($hijos)])->orderBy("description")->all();
+        return $roles;
+    }
 }

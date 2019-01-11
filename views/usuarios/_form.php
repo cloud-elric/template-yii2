@@ -79,7 +79,7 @@ use app\models\AuthItem;
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <?= Html::submitButton('<span class="ladda-label"><i class="icon wb-plus"></i> Guardar usuario</span>', ['class' => "btn btn-primary ladda-button btn-usuarios-add", "data-style" => "zoom-in", "id" => "btn-guardar-usuario"]) ?>
+                    <?= Html::submitButton('<span class="ladda-label no-pjax"><i class="icon wb-plus"></i> Guardar usuario</span>', ['class' => "btn btn-primary ladda-button btn-usuarios-add no-pjax", "data-style" => "zoom-in", "id" => "btn-guardar-usuario"]) ?>
                 </div>
             </div>
         </div>
